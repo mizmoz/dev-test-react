@@ -12,7 +12,8 @@ const FormStyled = styled.form`
 
 class Form extends React.Component {
   state = {
-    populationValue: 0
+    populationValue: 0,
+    countryValue: ""
   };
   handleSubmit = e => {
     e.preventDefault();
@@ -24,6 +25,11 @@ class Form extends React.Component {
     this.setState({ populationValue });
   };
 
+  updateCountryValue = e => {
+    const { value: countryValue } = e.target;
+    this.setState({ countryValue });
+  };
+
   render() {
     const inputTextPropList = {
       placeholder: "type in the population number",
@@ -32,7 +38,8 @@ class Form extends React.Component {
     };
 
     const inputSelectPropList = {
-      optionList: CountriesList
+      optionList: CountriesList,
+      onChange: this.updateCountryValue
     };
 
     const submitButtonPropList = {
