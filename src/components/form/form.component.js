@@ -5,6 +5,7 @@ import InputSelect from "../input-select";
 import Button from "../app/Button";
 import styled from "styled-components";
 import { style } from "../../configs/theme";
+import { connect } from "react-redux";
 
 const FormStyled = styled.form`
   display: flex;
@@ -17,7 +18,8 @@ class Form extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.refs);
+    console.log(this.state);
+    this.props.addPopulation(this.state);
   };
 
   updatePopulationValue = e => {
@@ -49,6 +51,8 @@ class Form extends React.Component {
 
     return (
       <FormStyled onSubmit={this.handleSubmit}>
+        <p>Country data: </p>
+        <pre>{JSON.stringify(this.props.countryData)}</pre>
         <InputSelect {...inputSelectPropList} />
         <InputText {...inputTextPropList} />
         <Button {...submitButtonPropList} />
@@ -57,4 +61,21 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+const mapStateToProps = state => ({
+  countryData: state.countryData
+});
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addPopulation: payload =>
+      dispatch({
+        type: "ADD_POPULATION",
+        payload
+      })
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Form);
