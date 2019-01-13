@@ -9,11 +9,18 @@ const InputTextStyled = styled.input`
   text-align: right;
 `;
 
-const InputText = ({ id, type, placeholder = "change me", ...propList }) => (
+const InputText = ({
+  id,
+  type,
+  placeholder = "change me",
+  onChange,
+  ...propList
+}) => (
   <InputTextStyled
     id={id}
     placeholder={placeholder}
     type={type}
+    onChange={onChange}
     {...propList}
   />
 );

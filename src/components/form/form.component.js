@@ -11,13 +11,24 @@ const FormStyled = styled.form`
 `;
 
 class Form extends React.Component {
+  state = {
+    populationValue: 0
+  };
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.refs);
   };
+
+  updatePopulationValue = e => {
+    const { value: populationValue } = e.target;
+    this.setState({ populationValue });
+  };
+
   render() {
     const inputTextPropList = {
       placeholder: "type in the population number",
-      type: "number"
+      type: "number",
+      onChange: this.updatePopulationValue
     };
 
     const inputSelectPropList = {
