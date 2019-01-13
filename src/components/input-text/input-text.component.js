@@ -5,6 +5,8 @@ import { style } from "../../configs/theme";
 
 const InputTextStyled = styled.input`
   border-radius: ${style("radius")};
+  flex-grow: 1;
+  text-align: right;
 `;
 
 const InputText = ({ id, type, placeholder = "change me", ...propList }) => (
