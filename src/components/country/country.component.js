@@ -6,6 +6,7 @@ import Button from "../app/Button";
 import styled from "styled-components";
 import { style } from "../../configs/theme";
 import { connect } from "react-redux";
+import CountryList from "../country-list";
 
 const FormStyled = styled.form`
   display: flex;
@@ -17,8 +18,15 @@ class Form extends React.Component {
     countryValue: ""
   };
   handleSubmit = e => {
+    const { populationValue, countryValue } = this.state;
     if (this.state.countryValue) {
-      this.props.addPopulation(this.state);
+      this.props.addPopulation({
+        countryCode: countryValue,
+        countryName: CountriesList.filter(
+          country => country.code === countryValue
+        ).reduce(a => a).name,
+        population: populationValue
+      });
       this.setState({
         countryValue: "",
         populationValue: 0
@@ -39,6 +47,8 @@ class Form extends React.Component {
   };
 
   render() {
+    const { countryData } = this.props;
+
     const inputTextPropList = {
       placeholder: "type in the population number",
       type: "number",
@@ -59,13 +69,14 @@ class Form extends React.Component {
     };
 
     return (
-      <FormStyled onSubmit={this.handleSubmit}>
-        <p>Country data: </p>
-        <pre>{JSON.stringify(this.props.countryData)}</pre>
-        <InputSelect {...inputSelectPropList} />
-        <InputText {...inputTextPropList} />
-        <Button {...submitButtonPropList} />
-      </FormStyled>
+      <>
+        <CountryList countryData={countryData} />
+        <FormStyled onSubmit={this.handleSubmit}>
+          <InputSelect {...inputSelectPropList} />
+          <InputText {...inputTextPropList} />
+          <Button {...submitButtonPropList} />
+        </FormStyled>
+      </>
     );
   }
 }
