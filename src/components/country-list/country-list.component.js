@@ -3,6 +3,7 @@ import React from "react";
 const CountryList = ({ countryData }) => {
   return countryData.length ? (
     <div>
+      <h2>Country list by population</h2>
       {countryData.map(({ countryName, population }) => (
         <div>
           {countryName} - {population}

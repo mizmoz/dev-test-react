@@ -70,12 +70,12 @@ class Form extends React.Component {
 
     return (
       <>
-        <CountryList countryData={countryData} />
         <FormStyled onSubmit={this.handleSubmit}>
           <InputSelect {...inputSelectPropList} />
           <InputText {...inputTextPropList} />
           <Button {...submitButtonPropList} />
         </FormStyled>
+        <CountryList countryData={countryData} />
       </>
     );
   }
