@@ -17,9 +17,15 @@ class Form extends React.Component {
     countryValue: ""
   };
   handleSubmit = e => {
+    if (this.state.countryValue) {
+      this.props.addPopulation(this.state);
+      this.setState({
+        countryValue: "",
+        populationValue: 0
+      });
+    }
+
     e.preventDefault();
-    console.log(this.state);
-    this.props.addPopulation(this.state);
   };
 
   updatePopulationValue = e => {
@@ -28,7 +34,7 @@ class Form extends React.Component {
   };
 
   updateCountryValue = e => {
-    const { value: countryValue } = e.target;
+    const countryValue = e.target.value.trim();
     this.setState({ countryValue });
   };
 
@@ -36,12 +42,15 @@ class Form extends React.Component {
     const inputTextPropList = {
       placeholder: "type in the population number",
       type: "number",
-      onChange: this.updatePopulationValue
+      onChange: this.updatePopulationValue,
+      value: this.state.populationValue
     };
 
     const inputSelectPropList = {
       optionList: CountriesList,
-      onChange: this.updateCountryValue
+      onChange: this.updateCountryValue,
+      required: "required",
+      value: this.state.countryValue
     };
 
     const submitButtonPropList = {

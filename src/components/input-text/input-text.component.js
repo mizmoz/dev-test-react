@@ -12,6 +12,7 @@ const InputTextStyled = styled.input`
 const InputText = ({
   id,
   type,
+  value,
   placeholder = "change me",
   onChange,
   ...propList
@@ -20,6 +21,7 @@ const InputText = ({
     id={id}
     placeholder={placeholder}
     type={type}
+    value={value}
     onChange={onChange}
     {...propList}
   />
