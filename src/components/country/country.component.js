@@ -79,7 +79,10 @@ class Form extends React.Component {
     };
 
     const inputSelectPropList = {
-      optionList: CountriesList,
+      optionList: [
+        { code: "", name: "-- select a country --" },
+        ...CountriesList
+      ],
       onChange: this.updateCountryValue,
       required: "required",
       value: this.state.countryValue
