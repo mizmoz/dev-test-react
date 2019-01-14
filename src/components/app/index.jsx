@@ -24,10 +24,6 @@ class Index extends Component{
     this.state = {
       dataFetched: null
     }
-
-    store.subscribe(() => {
-      console.log('YEAAa???');
-    })
     store.dispatch(fetchLoad());
     ApiCountry()
     .then((d) => {
@@ -48,6 +44,12 @@ class Index extends Component{
     });
   }
 
+  componentDidMount() {
+    store.subscribe(() => {
+      console.log('YEAAa???');
+      this.forceUpdate();
+    });
+  }
   countryEdited(country, value) {
     console.log(':: this ', this);
     
@@ -58,7 +60,6 @@ class Index extends Component{
     store.dispatch(editPopulation(this.state.dataFetched[country], value));
   }
   render() {
-    console.log(':::: RENDER ::::')
     return (
       <Provider store={store}>
         <Theme>
