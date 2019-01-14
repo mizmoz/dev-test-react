@@ -49,7 +49,7 @@ export default class Theme extends PureComponent {
       .country-list-container{
         background-color: 'red';
         display: flex;
-        align-items: center; /* Align Items Vertically */
+        // align-items: center; /* Align Items Vertically */
         justify-content: space-between;
       }
       .drop-button{

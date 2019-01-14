@@ -10,10 +10,9 @@ const CountryItem = (props) => {
             {props.item.name}
             <input
               type="text"
-              pattern="[0-9]*"
-              placeholder={-1}
+              placeholder={'*'}
               data-id={props.item.name}
-              value={props.item.value}
+              value={(props.item.value) ? props.item.value : ''}
               onChange={(e) => {
                 const v = e.currentTarget.value;
                 if (parseInt(v)) {
@@ -28,9 +27,6 @@ const CountryItem = (props) => {
           </button>
       </li>
   )
-  const updateNumber = (d) => {
-  console.log('ciao', d);
-  }
 }
 
 export default CountryItem;

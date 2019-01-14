@@ -11,22 +11,25 @@ import {
   fetchLoad,
   fetchComplete,
   fetchFail,
-  fetchSomething,
   editPopulation
 } from '../../store/actions/action-api-results';
 const store = createStore();
 class Index extends Component{
   constructor(props) {
     super(props);
-
+    //** bind function  */
     this.countryEdited.bind(this);
 
+    //** set initial state */
     this.state = {
       dataFetched: null
     }
+
+    //** start fetch. pass to store the fecthig state */
     store.dispatch(fetchLoad());
     ApiCountry()
     .then((d) => {
+      //** all donw. let's store the label in a dictionary, and tell store we are done */
       var dictFetched = {}
       d.map((d, i) => {
         dictFetched[d.name] = i;
@@ -36,6 +39,7 @@ class Index extends Component{
         dataFetched: dictFetched
       })
     })
+    //** in case something goes wrong */
     .catch((e) => {
       store.dispatch(fetchFail(e));
       this.setState({
@@ -44,22 +48,24 @@ class Index extends Component{
     });
   }
 
+  //** re-update the component when store is updated */
   componentDidMount() {
     store.subscribe(() => {
-      console.log('YEAAa???');
       this.forceUpdate();
     });
   }
+  //** everytime a population entry is changed */
   countryEdited(country, value) {
-    console.log(':: this ', this);
-    
-    console.log(this.state.dataFetched[country], value);
-    console.log(':: --> Country ', country);
-    console.log(':: --> value ', value);
-    
     store.dispatch(editPopulation(this.state.dataFetched[country], value));
   }
   render() {
+    //** re-order items based on population */
+    const itemsOrdered = [...store.getState().apiResults.items]
+    itemsOrdered.sort((a,b) => {
+        let av = Number(a.value)
+        let bv = Number(b.value)
+        return (av - bv) ;
+      });
     return (
       <Provider store={store}>
         <Theme>
@@ -68,19 +74,26 @@ class Index extends Component{
               COUNTRY by POPULATION
             </H1>
             {
+              //** verify if error in api, or we have data */
                 (store.getState().apiResults.items.length <= 0)
                 ? (store.getState().apiResults.error === 'error: no data')
                   ? <div>ERROR</div>
                   : <div>FETCHING</div>
                 : 
                   <div className="country-list-container">
+                  {
+                    //** left results. empty at the beginning
+                  }
                     <CountryList
                       drop={false}
                       onChange={(d) => {                        
                         this.countryEdited(d.currentTarget.getAttribute('data-id'), d.currentTarget.value)
                       }}
-                      list={store.getState().apiResults.items}>
+                      list={itemsOrdered}>
                     </CountryList>
+                  {
+                    //** right results. press the button to display the list
+                  }
                     <CountryList
                       drop={true}
                       onChange={(d) => {                        

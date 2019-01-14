@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import Item from './country-item/country-item';
 
 import TweenMax from 'gsap/TweenMax';
-var countryListElement
+
+let countryListElement;
+let boxCountryListElement;
 class CountryList extends Component{
 
   constructor(props) {
@@ -13,9 +15,14 @@ class CountryList extends Component{
   }
   componentDidMount() {
     countryListElement = document.getElementsByClassName('drop')[0];
+    boxCountryListElement = document.getElementsByClassName('box-drop')[0];
+    console.log('boxCountryListElement ', boxCountryListElement);
     if (this.props.drop) {
       TweenMax.set(countryListElement, {
         top: -countryListElement.offsetHeight
+      });
+      TweenMax.set(boxCountryListElement, {
+        height: 0
       });
     }
   }
@@ -27,12 +34,18 @@ class CountryList extends Component{
       TweenMax.to(countryListElement, 1, {
         top: -countryListElement.offsetHeight
       });
+      TweenMax.to(boxCountryListElement, 1, {
+        height: 0
+      });
     } else {
       this.setState({
         listOpened: true
       });
       TweenMax.to(countryListElement, 1, {
         top: 0
+      });
+      TweenMax.to(boxCountryListElement, 1, {
+        height: countryListElement.offsetHeight
       });
     }
     
@@ -41,23 +54,33 @@ class CountryList extends Component{
     let listItems = <div></div>;
     listItems  = this.props.list.map((item, index) => {
       //** default is false. we check on their index */
-      let selected = false;
-      if (this.props.companySelected === index) {
-        selected = true;
+      if (!this.props.drop) {
+        if (item.value) {
+          return (
+            <Item
+              onChange={this.props.onChange}
+              key={index}
+              index={index}
+              item={item}>
+            </Item>
+          );
+        }
+      } else {
+        return (
+          <Item
+            onChange={this.props.onChange}
+            key={index}
+            index={index}
+            item={item}>
+          </Item>
+        );
       }
-      return (
-        <Item
-          selected={selected}
-          onChange={this.props.onChange}
-          key={index}
-          index={index}
-          item={item}>
-        </Item>
-      );
     });
+    let styleBoxCountry = 'box-country-list';
     let styleCountry = 'country-list';
     if (this.props.drop) {
       styleCountry = 'country-list drop';
+      styleBoxCountry = 'box-country-list box-drop';
     }
     return (
       <div>
@@ -70,7 +93,7 @@ class CountryList extends Component{
           : <div></div>
         }
         <div 
-          className="box-country-list">
+          className={styleBoxCountry}>
           <ul
             className={styleCountry}>
             {listItems}
