@@ -5,21 +5,38 @@ import Button from "../app/Button";
 
 const CountryListStyled = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr auto;
   grid-gap: 10px;
+  font-size: 1.5rem;
+`;
+
+const CountryListHeaderStyled = styled.div`
+  font-weight: bold;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 0.5rem 1rem;
+`;
+
+const CountryListTitleStyled = styled.div`
+  font-size: 2rem;
+  padding: 1.5rem 0;
 `;
 
 const CountryList = ({ countryData, handleDelete, handleEdit }) => {
   return countryData.length ? (
     <>
-      <h2>Country list by population</h2>
+      <CountryListTitleStyled>
+        Country list by population
+      </CountryListTitleStyled>
 
       <CountryListStyled>
         {[
           <React.Fragment key="header">
-            <div>Country Name</div>
-            <div>Country Population</div>
-            <div>Actions</div>
+            <CountryListHeaderStyled>Country Name</CountryListHeaderStyled>
+            <CountryListHeaderStyled>
+              Country Population
+            </CountryListHeaderStyled>
+            <CountryListHeaderStyled>Actions</CountryListHeaderStyled>
           </React.Fragment>,
           ...countryData.map(({ countryName, population, countryCode }) => (
             <React.Fragment key={countryCode}>
