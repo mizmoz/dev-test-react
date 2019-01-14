@@ -1,7 +1,8 @@
 import {
   FETCH_LOAD,
   FETCH_COMPLETE,
-  FETCH_FAIL
+  FETCH_FAIL,
+  EDIT_POPULATION
 } from './../actions/action-api-results';
 
 const initialState = {
@@ -29,12 +30,23 @@ export default function productReducer(state = initialState, action) {
       };
 
     case FETCH_FAIL:
-      return {
+      returnState = {
         ...state,
         loading: false,
         error: action.payload.error,
         items: []
       };
+      return returnState;
+
+    case EDIT_POPULATION:
+      var returnState =  {
+        ...state,
+        loading: false
+      };
+      console.log(':: return state ', action)
+      returnState.items[action.country].value = action.value;
+      return returnState;
+      break;
 
     default:
       // ALWAYS have a default case in a reducer

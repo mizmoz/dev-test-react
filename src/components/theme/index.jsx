@@ -26,17 +26,34 @@ export default class Theme extends PureComponent {
       }
       
       html {
-        padding: ${theme.padding};
+        padding: 0;
       }
       
       body {
         padding: 0;
       }
       
-      * {
-        box-sizing: border-box;
+
+      .box-country-list{
+        width: 100%;
+        background-color: 'yellow';
+        overflow: hidden;
+
+      }
+      .country-list{
+        list-style: none;
         margin: 0;
         padding: 0;
+        position: relative;
+      }
+      .country-list-container{
+        background-color: 'red';
+        display: flex;
+        align-items: center; /* Align Items Vertically */
+        justify-content: space-between;
+      }
+      .drop-button{
+        width: 300px;
       }
     `;
   }
