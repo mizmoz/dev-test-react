@@ -52,6 +52,11 @@ class Form extends React.Component {
     this.props.deletePopulation(countryCode);
   };
 
+  handleEdit = countryCode => {
+    console.log(`I want to edit the country with code: ${countryCode}`);
+    // this.props.deletePopulation(countryCode);
+  };
+
   render() {
     const { countryData } = this.props;
 
@@ -84,6 +89,7 @@ class Form extends React.Component {
         <CountryList
           countryData={countryData}
           handleDelete={this.handleDelete}
+          handleEdit={this.handleEdit}
         />
       </>
     );
