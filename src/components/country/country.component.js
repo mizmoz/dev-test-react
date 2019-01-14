@@ -53,6 +53,17 @@ class Form extends React.Component {
   };
 
   handleEdit = countryCode => {
+    const { countryData } = this.props;
+    const country = countryData
+      .filter(country => country.countryCode === countryCode)
+      .reduce(c => c);
+    const populationValue = country.population;
+    const countryValue = country.population;
+
+    this.setState({
+      populationValue,
+      countryValue: countryCode
+    });
     console.log(`I want to edit the country with code: ${countryCode}`);
     // this.props.deletePopulation(countryCode);
   };
