@@ -16,39 +16,48 @@ class CountryList extends Component{
   componentDidMount() {
     countryListElement = document.getElementsByClassName('drop')[0];
     boxCountryListElement = document.getElementsByClassName('box-drop')[0];
-    console.log('boxCountryListElement ', boxCountryListElement);
     if (this.props.drop) {
-      TweenMax.set(countryListElement, {
-        top: -countryListElement.offsetHeight
-      });
-      TweenMax.set(boxCountryListElement, {
-        height: 0
-      });
+      this.close();
     }
   }
   listClick() {
     if (this.state.listOpened) {
-      this.setState({
-        listOpened: false
-      });
-      TweenMax.to(countryListElement, 1, {
-        top: -countryListElement.offsetHeight
-      });
-      TweenMax.to(boxCountryListElement, 1, {
-        height: 0
-      });
+      this.close();
     } else {
-      this.setState({
-        listOpened: true
-      });
-      TweenMax.to(countryListElement, 1, {
-        top: 0
-      });
-      TweenMax.to(boxCountryListElement, 1, {
-        height: countryListElement.offsetHeight
-      });
+      this.open();
     }
-    
+  }
+  open() {
+    this.setState({
+      listOpened: true
+    });
+    TweenMax.to(countryListElement, 1, {
+      top: 0
+    });
+    TweenMax.to(boxCountryListElement, 1, {
+      height: countryListElement.offsetHeight
+    });
+  }
+  close() {
+    this.setState({
+      listOpened: false
+    });
+    TweenMax.to(countryListElement, 1, {
+      top: -countryListElement.offsetHeight
+    });
+    TweenMax.to(boxCountryListElement, 1, {
+      height: 0
+    });
+  }
+  getItem(index, item) {
+    return (
+      <Item
+        onChange={this.props.onChange}
+        key={index}
+        index={index}
+        item={item}>
+      </Item>
+    );
   }
   render() {
     let listItems = <div></div>;
@@ -56,26 +65,13 @@ class CountryList extends Component{
       //** default is false. we check on their index */
       if (!this.props.drop) {
         if (item.value) {
-          return (
-            <Item
-              onChange={this.props.onChange}
-              key={index}
-              index={index}
-              item={item}>
-            </Item>
-          );
+          return this.getItem(index, item);
         }
       } else {
-        return (
-          <Item
-            onChange={this.props.onChange}
-            key={index}
-            index={index}
-            item={item}>
-          </Item>
-        );
+        return this.getItem(index, item);
       }
     });
+    //** using class as selector */
     let styleBoxCountry = 'box-country-list';
     let styleCountry = 'country-list';
     if (this.props.drop) {

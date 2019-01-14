@@ -60,7 +60,12 @@ class Index extends Component{
   }
   render() {
     //** re-order items based on population */
-    const itemsOrdered = [...store.getState().apiResults.items]
+    var itemsOrdered = [];
+    store.getState().apiResults.items.map((d) => {
+      if (d.value) {
+        itemsOrdered.push(d)
+      }
+    });
     itemsOrdered.sort((a,b) => {
         let av = Number(a.value)
         let bv = Number(b.value)
