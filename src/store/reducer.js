@@ -1,4 +1,4 @@
-import countryReducer from "../components/form/country.reducer";
+import countryReducer from "../components/country/country.reducer";
 import { combineReducers } from "redux";
 
 export const getInitialState = () => ({

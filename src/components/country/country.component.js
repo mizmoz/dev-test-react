@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { style } from "../../configs/theme";
 import { connect } from "react-redux";
 import CountryList from "../country-list";
+import { addPopulation, deletePopulation } from "./country.action";
 
 const FormStyled = styled.form`
   display: flex;
@@ -46,6 +47,11 @@ class Form extends React.Component {
     this.setState({ countryValue });
   };
 
+  handleDelete = countryCode => {
+    console.log(`I want to delete the country with code: ${countryCode}`);
+    this.props.deletePopulation(countryCode);
+  };
+
   render() {
     const { countryData } = this.props;
 
@@ -75,7 +81,10 @@ class Form extends React.Component {
           <InputText {...inputTextPropList} />
           <Button {...submitButtonPropList} />
         </FormStyled>
-        <CountryList countryData={countryData} />
+        <CountryList
+          countryData={countryData}
+          handleDelete={this.handleDelete}
+        />
       </>
     );
   }
@@ -87,11 +96,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    addPopulation: payload =>
-      dispatch({
-        type: "ADD_POPULATION",
-        payload
-      })
+    addPopulation: payload => dispatch(addPopulation(payload)),
+    deletePopulation: payload => dispatch(deletePopulation(payload))
   };
 };
 

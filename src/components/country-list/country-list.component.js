@@ -6,9 +6,10 @@ import Button from "../app/Button";
 const CountryListStyled = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 `;
 
-const CountryList = ({ countryData }) => {
+const CountryList = ({ countryData, handleDelete }) => {
   return countryData.length ? (
     <>
       <h2>Country list by population</h2>
@@ -20,13 +21,17 @@ const CountryList = ({ countryData }) => {
             <div>Country Population</div>
             <div>Actions</div>
           </>,
-          ...countryData.map(({ countryName, population }) => (
+          ...countryData.map(({ countryName, population, countryCode }) => (
             <>
               <div>{countryName}</div>
               <div>{population}</div>
               <div>
                 <Button label="✎" color="secondary" />
-                <Button label="×" color="quaternary" />
+                <Button
+                  label="×"
+                  color="quaternary"
+                  onClick={() => handleDelete(countryCode)}
+                />
               </div>
             </>
           ))
