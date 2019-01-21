@@ -8,7 +8,8 @@
     "go": "yarn install && yarn run start",
     "go-npm": "npm install && npm run start",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --history-api-fallback"
+    "start": "webpack-dev-server --mode development --open --history-api-fallback",
+    "lint": "eslint ."
   },
   "dependencies": {
     "prop-types": "^15.6.2",
