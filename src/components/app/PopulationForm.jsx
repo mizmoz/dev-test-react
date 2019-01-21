@@ -74,7 +74,7 @@ class PopulationForm extends React.Component {
 }
 
 PopulationForm.propTypes = {
-  onSubmit: PropTypes.func,
+  countries: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps)(PopulationForm);
