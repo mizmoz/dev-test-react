@@ -6,6 +6,7 @@ import createStore from '../../store';
 import Layout from '../layout';
 import H1 from './H1';
 import PopulationForm from './PopulationForm';
+import PopulationList from './PopulationList';
 import { fetchCountries } from '../../actions';
 
 // create the redux store
@@ -21,6 +22,7 @@ export default () => (
           Good luck!
         </H1>
         <PopulationForm />
+        <PopulationList />
       </Layout>
     </Theme>
   </Provider>
