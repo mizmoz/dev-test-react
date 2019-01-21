@@ -1,10 +1,17 @@
+import { GET_DATA } from '../actions';
 
 export const getInitialState = () => ({
-  // initial state...
+  countries: [],
 });
 
-export default (state, action) => ({
-  ...state,
-
-  // reducers...
-});
+export default (state, action) => {
+  switch (action.type) {
+    case GET_DATA: {
+      return Object.assign({}, state, {
+        countries: action.countries,
+      });
+    }
+    default:
+      return state;
+  }
+};
