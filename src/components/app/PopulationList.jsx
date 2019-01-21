@@ -12,6 +12,14 @@ const PopulationListStyled = styled.ol`
   list-style: none;
 `;
 
+const PopulationListItem = styled.li`
+  padding: ${style('paddingTiny')};
+  
+  &:nth-child(even) {
+    background: ${style('color.componentAlt')};
+  }
+`;
+
 const mapDispatchToProps = dispatch => ({
   deleteCountryPopulation: (selectedCountry) => {
     // dispatch(deleteCountryPopulation(selectedCountry));
@@ -46,11 +54,13 @@ class PopulationList extends React.Component {
       });
     });
 
+    storedPairs.sort((a, b) => a.population - b.population);
+
     if (storedPairs.length >= 1) {
       return (
         <PopulationListStyled>
           {storedPairs.map(country  => (
-            <li key={country.name}>{country.name} - {country.population}</li>
+            <PopulationListItem key={country.name}>{country.name} - {country.population}</PopulationListItem>
           ))}
         </PopulationListStyled>
       );

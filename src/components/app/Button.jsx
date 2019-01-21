@@ -17,10 +17,9 @@ const ButtonStyled = styled.button`
   font-size: ${style('fontSize.normal')};
   font-weight: ${style('headerFontWeight')};
   line-height: ${style('fontSize.normal')};
-  padding: ${style('paddingHalf')};
+  padding: ${style('paddingTiny')} ${style('paddingHalf')};
   position: relative;
   text-decoration: none;
-  margin-left: ${style('marginHalf')};
 `;
 
 const Button = ({ label, ...props }) => (
