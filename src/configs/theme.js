@@ -69,7 +69,7 @@ export default {
   },
 
   fontSize: {
-    h1: '4.25rem',
+    h1: '3.25rem',
     h2: '2.5rem',
     h3: '1.75rem',
     h4: '1.375rem',
@@ -81,8 +81,16 @@ export default {
     large: 'rgba(0,0,0,.10) 0 1px 6px 1px',
   },
 
+  height: {
+    input: '40px',
+    select: '40px',
+  },
+
   width: {
     min: '320px',
     max: '1200px',
+    label: '150px',
+    input: '200px',
+    select: '200px',
   },
 };
