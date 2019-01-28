@@ -5,7 +5,7 @@ import Theme from '../theme';
 import createStore from '../../store';
 import Layout from '../layout';
 import H1 from './H1';
-import Form from '../../containers/Form';
+import Form from './Form';
 import apiCountry from '../../api/country';
 
 // create the redux store

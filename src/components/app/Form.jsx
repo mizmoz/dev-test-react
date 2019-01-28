@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { selectCountry, setPopulation } from '../../store/actions'
 import Div from './Div';
 import Button from './Button';
 import Label from './Label';
 import Select from './Select';
 import Input from './Input';
 
-
-const getSelectedCountry = (countries, code) => {
-  var country = countries.find(country => {
-    return country.code == code;
-  });
-  return country;
-}
+// const getSelectedCountry = (countries, code) => {
+//   var country = countries.find(country => {
+//     return country.code == code;
+//   });
+//   return country;
+// }
 
 class Form extends React.Component {
   constructor(props) {
@@ -26,6 +27,10 @@ class Form extends React.Component {
       population: event.target.value
     })
   }
+
+  // componentWillUpdate() {
+  //   debugger;
+  // }
 
   render() {
     const { countries, countrySelected, populationSelected, onCountryChange, onUpdatePopulation, onDeletePopulation } = this.props;
@@ -57,4 +62,24 @@ class Form extends React.Component {
   }
 }
 
-export default Form;
+const mapStateToProps = state => ({
+  countries: state.countries,
+  countrySelected: state.countrySelected
+})
+
+const mapDispatchToProps = dispatch => ({
+  onCountryChange: event => dispatch(selectCountry(event.target.value)),
+  onUpdatePopulation: (event, country, population) => {
+    event.preventDefault();
+    dispatch(setPopulation(country, population))
+  },
+  onDeletePopulation: (event, country) => {
+    event.preventDefault();
+    dispatch(setPopulation(country))
+  },
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Form)
