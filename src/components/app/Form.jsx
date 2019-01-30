@@ -17,7 +17,7 @@ class Form extends React.Component {
   }
 
   onPopulationChange = (event) => {
-    this.setState({ population: event.target.value })
+    this.setState({ population: parseInt(event.target.value) })
   }
 
   onCountryChange = (event) => {

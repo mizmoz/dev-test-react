@@ -32,6 +32,7 @@ export default (state, action) => {
           ? { ...country, population: action.population }
           : country
       )
+      countries.sort((a, b) => (b.population ? b.population : 0) - (a.population ? a.population : 0));
       return {
         ...state,
         countries: countries
