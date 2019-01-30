@@ -7,42 +7,54 @@ import Label from './Label';
 import Select from './Select';
 import Input from './Input';
 
-// const getSelectedCountry = (countries, code) => {
-//   var country = countries.find(country => {
-//     return country.code == code;
-//   });
-//   return country;
-// }
-
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      country: '',
       population: ''
     }
   }
 
   onPopulationChange = (event) => {
+    this.setState({ population: event.target.value })
+  }
+
+  onCountryChange = (event) => {
+    const country = this.props.countries.find(country => country.code === event.target.value);
     this.setState({
-      population: event.target.value
+      country: country.code,
+      population: country.population ? country.population : ''
     })
   }
 
-  // componentWillUpdate() {
-  //   debugger;
-  // }
+  onPopulationUpdate = (event) => {
+    event.preventDefault();
+    this.props.onPopulationUpdate(this.state.country, this.state.population);
+  }
+
+  onPopulationDelete = (event) => {
+    event.preventDefault();
+    this.setState({ population: '' });
+    this.props.onPopulationDelete(this.state.country);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.countries.length && this.props.countries.length) {
+      this.setState({ country: this.props.countries[0].code });
+    }
+  }
 
   render() {
-    const { countries, countrySelected, populationSelected, onCountryChange, onUpdatePopulation, onDeletePopulation } = this.props;
+    const { countries } = this.props;
     const { population } = this.state;
     return (
       <form>
-        Country selected: {countrySelected} <br />
         <Div>
           <Label htmlFor="selectCountry">Select country:</Label>
-          <Select id="selectCountry" onChange={onCountryChange}>
+          <Select id="selectCountry" onChange={this.onCountryChange}>
             {countries.map(country =>
-              <option key={country.code} value={country.code}>{country.name} {country.population ? country.population : ''}</option>
+              <option key={country.code} value={country.code}>{country.name} {country.population ? (' - ' + country.population) : ''}</option>
             )}
           </Select>
         </Div>
@@ -54,8 +66,8 @@ class Form extends React.Component {
           />
         </Div>
         <Div>
-          <Button onClick={(event) => onUpdatePopulation(event, countrySelected, population)}>Update population</Button>
-          <Button onClick={(event) => onDeletePopulation(event, countrySelected)}>Delete population</Button>
+          <Button onClick={this.onPopulationUpdate}>Update population</Button>
+          <Button onClick={this.onPopulationDelete}>Delete population</Button>
         </Div>
       </form>
     )
@@ -69,14 +81,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onCountryChange: event => dispatch(selectCountry(event.target.value)),
-  onUpdatePopulation: (event, country, population) => {
-    event.preventDefault();
-    dispatch(setPopulation(country, population))
-  },
-  onDeletePopulation: (event, country) => {
-    event.preventDefault();
-    dispatch(setPopulation(country))
-  },
+  onPopulationUpdate: (country, population) => dispatch(setPopulation(country, population)),
+  onPopulationDelete: (country) => dispatch(setPopulation(country)),
 })
 
 export default connect(
