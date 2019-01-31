@@ -70,7 +70,7 @@ export default {
 
   fontSize: {
     h1: '3.25rem',
-    h2: '2.5rem',
+    h2: '2rem',
     h3: '1.75rem',
     h4: '1.375rem',
     normal: '1rem',
