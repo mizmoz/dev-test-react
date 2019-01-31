@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { selectCountry, setPopulation } from '../../store/actions'
+import apiCountry from '../../api/country';
+import { fetchCountriesComplete, fetchCountriesError, selectCountry, setPopulation } from '../../store/actions'
 import Div from './Div';
 import Button from './Button';
 import Label from './Label';
@@ -37,6 +38,10 @@ class Form extends React.Component {
     event.preventDefault();
     this.setState({ population: '' });
     this.props.onPopulationDelete(this.state.country);
+  }
+
+  componentDidMount() {
+    this.props.fetchCountries();
   }
 
   componentDidUpdate(prevProps) {
@@ -80,6 +85,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
+  fetchCountries: () => {
+    return apiCountry().then(countries => {
+      dispatch(fetchCountriesComplete(countries));
+    }).catch(reason => {
+      dispatch(fetchCountriesError(reason));
+    });
+  },
   onCountryChange: event => dispatch(selectCountry(event.target.value)),
   onPopulationUpdate: (country, population) => dispatch(setPopulation(country, population)),
   onPopulationDelete: (country) => dispatch(setPopulation(country)),
