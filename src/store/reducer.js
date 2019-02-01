@@ -3,7 +3,8 @@ export const getInitialState = () => ({
   loading: true,
   error: false,
   countries: [],
-  countrySelected: null
+  activeCountryCode: null,
+  activeCountryPopulation: '',
 });
 
 export default (state, action) => {
@@ -13,7 +14,7 @@ export default (state, action) => {
         ...state,
         loading: false,
         countries: action.countries,
-        countrySelected: action.countries[0].code
+        activeCountryCode: action.countries[0].code
       };
     case "FETCH_COUNTRIES_ERROR":
       return {
@@ -21,21 +22,30 @@ export default (state, action) => {
         loading: false,
         error: true,
       };
-    case "SELECT_COUNTRY":
-      return {
-        ...state,
-        countrySelected: action.countrySelected
-      }
     case "SET_POPULATION":
+      const population = action.population ? action.population : '';
       let countries = state.countries.map(country =>
         (country.code === action.country)
-          ? { ...country, population: action.population }
+          ? { ...country, population }
           : country
       )
       countries.sort((a, b) => (b.population ? b.population : 0) - (a.population ? a.population : 0));
       return {
         ...state,
-        countries: countries
+        countries: countries,
+        activeCountryPopulation: population
+      }
+    case "SET_ACTIVE_COUNTRY_CODE":
+      const country = state.countries.find(country => country.code === event.target.value);
+      return {
+        ...state,
+        activeCountryCode: action.activeCountryCode,
+        activeCountryPopulation: country.population ? country.population : ''
+      }
+    case "SET_ACTIVE_COUNTRY_POPULATION":
+      return {
+        ...state,
+        activeCountryPopulation: action.activeCountryPopulation
       }
     default:
       return state;

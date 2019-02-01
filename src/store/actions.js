@@ -8,11 +8,6 @@ export const fetchCountriesError = (error) => ({
   error
 });
 
-export const selectCountry = countrySelected => ({
-  type: 'SELECT_COUNTRY',
-  countrySelected
-})
-
 export const setPopulation = (country, population) => ({
   type: 'SET_POPULATION',
   country,
@@ -23,4 +18,14 @@ export const deletePopulation = country => ({
   type: 'SET_POPULATION',
   country,
   population: ''
+})
+
+export const setActiveCountryCode = activeCountryCode => ({
+  type: 'SET_ACTIVE_COUNTRY_CODE',
+  activeCountryCode
+})
+
+export const setActiveCountryPopulation = activeCountryPopulation => ({
+  type: 'SET_ACTIVE_COUNTRY_POPULATION',
+  activeCountryPopulation
 })

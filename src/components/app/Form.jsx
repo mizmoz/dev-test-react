@@ -1,88 +1,53 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { selectCountry, setPopulation } from '../../store/actions'
+import { setActiveCountryCode, setActiveCountryPopulation, setPopulation } from '../../store/actions'
 import Div from './Div';
 import Button from './Button';
 import Label from './Label';
 import Select from './Select';
 import Input from './Input';
 
-class Form extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      country: '',
-      population: ''
-    }
-  }
-
-  onPopulationChange = (event) => {
-    this.setState({ population: parseInt(event.target.value) })
-  }
-
-  onCountryChange = (event) => {
-    const country = this.props.countries.find(country => country.code === event.target.value);
-    this.setState({
-      country: country.code,
-      population: country.population ? country.population : ''
-    })
-  }
-
-  onPopulationUpdate = (event) => {
-    event.preventDefault();
-    this.props.onPopulationUpdate(this.state.country, this.state.population);
-  }
-
-  onPopulationDelete = (event) => {
-    event.preventDefault();
-    this.setState({ population: '' });
-    this.props.onPopulationDelete(this.state.country);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!prevProps.countries.length && this.props.countries.length) {
-      this.setState({ country: this.props.countries[0].code });
-    }
-  }
-
-  render() {
-    const { countries } = this.props;
-    const { population } = this.state;
-    return (
-      <form>
-        <Div>
-          <Label htmlFor="selectCountry">Select country:</Label>
-          <Select id="selectCountry" onChange={this.onCountryChange}>
-            {countries.map(country =>
-              <option key={country.code} value={country.code}>{country.name} {country.population ? (' - ' + country.population) : ''}</option>
-            )}
-          </Select>
-        </Div>
-        <Div>
-          <Label htmlFor="inputPopulation">Population:</Label>
-          <Input type="number" id="inputPopulation"
-            value={population}
-            onChange={this.onPopulationChange}
-          />
-        </Div>
-        <Div>
-          <Button onClick={this.onPopulationUpdate}>Update population</Button>
-          <Button onClick={this.onPopulationDelete}>Delete population</Button>
-        </Div>
-      </form>
-    )
-  }
-}
+const Form = ({ activeCountryCode, activeCountryPopulation, countries, onCountryChange, onPopulationChange, onPopulationUpdate, onPopulationDelete }) => (
+  <form>
+    <Div>
+      <Label htmlFor="selectCountry">Select country:</Label>
+      <Select id="selectCountry" onChange={onCountryChange}>
+        {countries.map(country =>
+          <option key={country.code} value={country.code}>{country.name} {country.population ? (' - ' + country.population) : ''}</option>
+        )}
+      </Select>
+    </Div>
+    <Div>
+      <Label htmlFor="inputPopulation">Population:</Label>
+      <Input type="number" id="inputPopulation"
+        value={activeCountryPopulation}
+        onChange={onPopulationChange}
+      />
+    </Div>
+    <Div>
+      <Button onClick={(event) => onPopulationUpdate(event, activeCountryCode, activeCountryPopulation)}>Update population</Button>
+      <Button onClick={(event) => onPopulationDelete(event, activeCountryCode)}>Delete population</Button>
+    </Div>
+  </form>
+)
 
 const mapStateToProps = state => ({
-  countries: state.countries
+  countries: state.countries,
+  activeCountryCode: state.activeCountryCode,
+  activeCountryPopulation: state.activeCountryPopulation,
 })
 
 const mapDispatchToProps = dispatch => ({
-
-  onCountryChange: event => dispatch(selectCountry(event.target.value)),
-  onPopulationUpdate: (country, population) => dispatch(setPopulation(country, population)),
-  onPopulationDelete: (country) => dispatch(setPopulation(country)),
+  onCountryChange: event => dispatch(setActiveCountryCode(event.target.value)),
+  onPopulationChange: event => dispatch(setActiveCountryPopulation(parseInt(event.target.value))),
+  onPopulationUpdate: (event, country, population) => {
+    event.preventDefault();
+    dispatch(setPopulation(country, population))
+  },
+  onPopulationDelete: (event, country) => {
+    event.preventDefault();
+    dispatch(setPopulation(country))
+  },
 })
 
 export default connect(
