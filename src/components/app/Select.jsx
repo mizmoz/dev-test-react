@@ -6,15 +6,17 @@ import { style } from '../../configs/theme';
 const SelectStyled = styled.select`
 	border-radius: ${style('radius')};
 	box-shadow: ${style('shadow.small')};
-
+	border: none;
 	font-family: ${style('baseFontFamily')};
 	font-size: ${style('fontSize.normal')};
 	font-weight: ${style('baseFontWeight')};
 	line-height: ${style('fontSize.normal')};
 	padding: ${style('paddingTiny')};
-	position: relative;
+	position: block;
 	text-decoration: none;
+	margin-top: ${style('marginHalf')};
 	margin-left: ${style('marginHalf')};
+	width: 350px;
 `;
 
 const Select = ({ ...props }) => <SelectStyled {...props} />;

@@ -5,6 +5,7 @@ import * as actions from '../../actions/actions';
 import Button from './Button';
 import Input from './Input';
 import Select from './Select';
+import styled from 'styled-components';
 
 class Form extends React.Component {
 	constructor(props) {
@@ -12,7 +13,7 @@ class Form extends React.Component {
 
 		this.state = {
 			countryId: -1,
-			population: 0
+			population: ''
 		};
 	}
 
@@ -75,6 +76,7 @@ class Form extends React.Component {
 						id="population"
 						type="number"
 						pattern="[0-9]*"
+						placeholder="Enter population"
 						value={this.state.population}
 						onChange={this.onChangePopulation}
 					/>

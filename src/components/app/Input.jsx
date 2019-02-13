@@ -13,9 +13,12 @@ const InputStyled = styled.input`
 	font-weight: ${style('baseFontWeight')};
 	line-height: ${style('fontSize.normal')};
 	padding: ${style('paddingTiny')};
-	position: relative;
+
+	display: block;
 	text-decoration: none;
+	margin-top: ${style('marginHalf')};
 	margin-left: ${style('marginHalf')};
+	width: 350px;
 `;
 
 const Input = ({ label, ...props }) => <InputStyled {...props} />;
