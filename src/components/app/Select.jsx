@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { style } from '../../configs/theme';
 
-const InputStyled = styled.select`
+const SelectStyled = styled.select`
 	border-radius: ${style('radius')};
 	box-shadow: ${style('shadow.small')};
 
@@ -17,7 +17,7 @@ const InputStyled = styled.select`
 	margin-left: ${style('marginHalf')};
 `;
 
-const Select = ({ ...props }) => <InputStyled {...props} />;
+const Select = ({ ...props }) => <SelectStyled {...props} />;
 
 Select.propTypes = {
 	color: PropTypes.string,
