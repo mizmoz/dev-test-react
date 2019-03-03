@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import P from 'components/app/P';
 import {
   selectCountriesByCode, selectCountriesByPopulationArray, selectError, selectLoading,
 } from '../../selectors';
@@ -14,13 +15,13 @@ class PopulationsContainer extends React.Component {
   }
 
   renderLoading = () => (
-    <p>Loading...</p>
+    <P>Loading...</P>
   )
 
   renderError = () => (
     <React.Fragment>
-      <p>Oops, something went wrong.</p>
-      <p>Please refresh your browser to try again.</p>
+      <P>Oops, something went wrong.</P>
+      <P>Please refresh your browser to try again.</P>
     </React.Fragment>
   )
 

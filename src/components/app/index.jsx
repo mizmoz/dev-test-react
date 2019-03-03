@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
+import Populations from 'features/Populations';
 import Theme from '../theme';
 import createStore from '../../store';
 import Layout from '../layout';
 import H1 from './H1';
-import Populations from 'features/Populations';
 
 const { PopulationsContainer } = Populations.components;
 // create the redux store
@@ -16,7 +16,7 @@ export default () => (
     <Theme>
       <Layout>
         <H1>
-          Good luck!
+          Dev Test React
         </H1>
         <PopulationsContainer />
       </Layout>
