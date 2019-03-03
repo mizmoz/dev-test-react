@@ -9,11 +9,6 @@ export const selectCountriesByCode = createSelector(
   state => state.countriesByCode,
 );
 
-export const selectCountriesAsArray = createSelector(
-  selectCountriesByCode,
-  countriesByCode => Object.values(countriesByCode),
-);
-
 export const selectLoading = createSelector(
   selectState,
   state => state.loading,
