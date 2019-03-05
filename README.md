@@ -27,3 +27,12 @@ Feel free to use the internet including Google and Stackoverflow to help with th
 Please just ask.
 
 Good luck and thanks for taking the time to complete this task!
+
+
+## Running on Create React App
+
+```
+yarn install && yarn start
+```
+
+More info here: https://github.com/facebook/create-react-app
