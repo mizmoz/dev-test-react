@@ -3,6 +3,8 @@ import { normalize } from 'polished';
 
 import { color } from 'styles/color';
 
+// Reset browser defaults and set default styles
+
 export const GlobalStyle = createGlobalStyle`
   ${normalize()};
 

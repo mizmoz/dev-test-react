@@ -3,6 +3,9 @@ import styled from 'styled-components/macro';
 import { color } from 'styles/color';
 import { SPACING, getSpacing } from 'styles/dimensions';
 
+// This would usually be split into different components
+// with this index being a single entry point
+
 export const Form = styled.form`
 	position: sticky;
 	top: 0;
@@ -11,7 +14,7 @@ export const Form = styled.form`
 	background: ${color.component};
 `;
 
-export const Fieldset = styled.fieldset`
+export const FieldGroup = styled.div`
   display: grid;
   grid-template-rows: min-content min-content min-content;
   grid-gap: ${getSpacing()};
@@ -19,7 +22,8 @@ export const Fieldset = styled.fieldset`
   padding: 0;
   border: 0;
 
-  @media (min-width: 768px) {
+  @media screen and (min-width: 768px) {
+    display: grid;
     grid-template-rows: min-content;
     grid-template-columns 1fr 1fr min-content;
   }

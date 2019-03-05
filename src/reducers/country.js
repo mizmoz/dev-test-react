@@ -4,7 +4,7 @@ const FETCH_SUCCESS = 'FETCH_SUCCESS';
 const POST_POPULATION = 'POST_POPULATION';
 const SORT_COUNTRIES = 'SORT_COUNTRIES';
 
-function getCountriesById(countries) {
+function getCountriesById(countries: Array<Object>) {
 	return countries.reduce((obj, item) => {
 		obj[item.code] = {
 			name: item.name,
@@ -21,7 +21,7 @@ export const initialState = {
 	countries: {},
 };
 
-export function reducer(state, action) {
+export function reducer(state: Object, action: Object) {
 	switch (action.type) {
 		case FETCH_COUNTRIES:
 			return {
@@ -78,16 +78,16 @@ export const fetchError = () => ({
 	type: FETCH_ERROR,
 });
 
-export const fetchSuccess = data => ({
+export const fetchSuccess = (data: Array<Object>) => ({
 	type: FETCH_SUCCESS,
 	data: data,
 });
 
-export const postPopulation = data => ({
+export const postPopulation = (data: Object) => ({
 	type: POST_POPULATION,
 	data: data,
 });
 
-export const sortCountries = data => ({
+export const sortCountries = () => ({
 	type: SORT_COUNTRIES,
 });

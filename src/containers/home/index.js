@@ -3,11 +3,14 @@ import styled from 'styled-components/macro';
 
 import { Button } from 'components/button';
 import { Error } from 'components/error';
-import { Fieldset, Form, FormRow, Input } from 'components/form';
+import { FieldGroup, Form, FormRow, Input } from 'components/form';
 import { Loading } from 'components/loading';
 import { Table, TD, TH, TR } from 'components/table';
 import { CountryContext } from 'providers/country';
 import { SPACING, getSpacing } from 'styles/dimensions';
+
+// These could be broken out into separate components but in this use case
+// it's accpetable and early abstraction can cause more issues down the line
 
 const Wrapper = styled.div`
 	display: grid;
@@ -81,7 +84,7 @@ export function Home() {
 	return (
 		<Wrapper>
 			<Form onSubmit={handleSubmit}>
-				<Fieldset>
+				<FieldGroup>
 					<FormRow>
 						<label htmlFor="country">Country:</label>
 						<select
@@ -118,7 +121,7 @@ export function Home() {
 							Update
 						</Button>
 					</FormRow>
-				</Fieldset>
+				</FieldGroup>
 			</Form>
 
 			<Table>

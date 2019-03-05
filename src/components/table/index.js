@@ -3,6 +3,9 @@ import styled from 'styled-components/macro';
 import { color } from 'styles/color';
 import { SPACING, getSpacing } from 'styles/dimensions';
 
+// This would usually be split into different components
+// with this index being a single entry point
+
 export const Table = styled.table`
 	width: 100%;
 	border-collapse: collapse;

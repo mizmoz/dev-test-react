@@ -1,4 +1,6 @@
+// @flow
 import React from 'react';
+import type { Node } from 'react';
 import styled from 'styled-components/macro';
 
 import { color } from 'styles/color';
@@ -43,7 +45,15 @@ const Wrapper = styled.button`
 	}
 `;
 
-export function Button(props) {
+type Props = {
+	children: Node,
+	disabled?: boolean,
+	level?: string,
+	type?: string,
+	onClick: Function,
+};
+
+export function Button(props: Props) {
 	const { children, disabled, level, type, onClick } = props;
 
 	return (

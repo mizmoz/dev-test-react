@@ -1,3 +1,5 @@
+// personal prefernece but using hsl colour gives a better dev experience
+//  and you cna programatically adjust on the fly
 export const color = {
 	/**
 	 * Style Colours
@@ -21,9 +23,4 @@ export const color = {
 	quaternaryAlt: '#FFFFFF',
 
 	white: '#ffffff',
-};
-
-export const shadow = {
-	small: 'rgba(0, 0, 0, .11765) 0 1px 6px, rgba(0, 0, 0, .11765) 0 1px 4px',
-	large: 'rgba(0, 0, 0, .10) 0 1px 6px 1px',
 };

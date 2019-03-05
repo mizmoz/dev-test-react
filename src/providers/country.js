@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
+import type { Node } from 'react';
 
 import Api from 'api/country';
 import {
@@ -18,7 +19,11 @@ export const CountryContext = React.createContext({
 	dispatch: () => {},
 });
 
-export default function CountryProvider(props) {
+type Props = {
+	children: Node,
+};
+
+export default function CountryProvider(props: Props) {
 	const { children } = props;
 	const [state, dispatch] = useReducer(reducer, initialState);
 
