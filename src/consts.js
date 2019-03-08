@@ -1,0 +1,3 @@
+export const RECEIVED_COUNTRIES = 'RECEIVED_COUNTRIES';
+export const ERROR_IN_FETCH = 'ERROR_IN_FETCH';
+export const API_ERROR = 'API_ERROR';
