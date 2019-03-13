@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { style } from '../../configs/theme';
+import { style } from '@config/theme';
 
 const ButtonStyled = styled.button`
   background: ${props => props.theme.color[props.color]};

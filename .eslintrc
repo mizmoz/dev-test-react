@@ -19,6 +19,16 @@
   "rules": {
     "max-len": [1, 120, 2],
     "react/jsx-uses-react": 1,
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
     "object-shorthand": [
       2,
       "consistent"
@@ -29,5 +39,10 @@
     "node": true,
     "es6": true,
     "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
   }
 }

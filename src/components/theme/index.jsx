@@ -1,9 +1,9 @@
-
+/* eslint-disable no-unused-expressions */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { injectGlobal, ThemeProvider } from 'styled-components';
 
-import defaultTheme from '../../configs/theme';
+import defaultTheme from '@config/theme';
 
 /**
  * Wrapper for the ThemeProvider from styled-components
@@ -61,7 +61,7 @@ Theme.propTypes = {
   /**
    * Theme config
    */
-  theme: PropTypes.object,
+  theme: PropTypes.shape(),
 };
 
 Theme.defaultProps = {

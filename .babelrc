@@ -7,6 +7,15 @@
     ["babel-plugin-styled-components", {
       "ssr": true
     }],
-    ["@babel/plugin-proposal-class-properties"]
+    ["@babel/plugin-proposal-class-properties"],
+    ["module-resolver", {
+      "root": ["./"],
+      "alias": {
+        "@api": "./src/api",
+        "@components": "./src/components",
+        "@config": "./src/config",
+        "@redux": "./src/redux"
+      }
+    }]
   ]
 }

@@ -1,5 +1,5 @@
 
-import countries from '../configs/country';
+import countries from '@config/country';
 
 /**
  * API to get the countries, sometimes this fails.

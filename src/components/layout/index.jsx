@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import { style } from '../../configs/theme';
+import { style } from '@config/theme';
 
 export const Row = styled.div`
   justify-content: ${props => (props.align ? props.align : 'initial')};

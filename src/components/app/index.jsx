@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import Theme from '../theme';
-import createStore from '../../store';
-import Layout from '../layout';
-import H1 from './H1';
+import Theme from '@components/theme';
+import createStore from '@redux';
+import Layout from '@components/layout';
+import H1 from '@components/app/H1';
 
 // create the redux store
 const store = createStore();
