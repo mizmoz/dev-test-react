@@ -9,6 +9,8 @@ import H1 from '@components/app/H1';
 // create the redux store
 const store = createStore();
 
+store.dispatch({ type: 'BOOTSTRAP' });
+
 export default () => (
   <Provider store={store}>
     <Theme>
