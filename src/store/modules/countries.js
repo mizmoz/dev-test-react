@@ -21,10 +21,15 @@ export const fetchCountriesData = createAction(FETCH_COUNTRIES);
 export const fetchCountriesDataSuccess = createAction(FETCH_COUNTRIES_SUCCESS);
 const fetchCountriesDataFailure = createAction(FETCH_COUNTRIES_FAILURE);
 
+const UPDATE_POPULATION = prefix('UPDATE_POPULATION');
+export const updatePopulation = createAction(UPDATE_POPULATION);
+
 export const initialState = {
   isFetching: false,
-  byCode: {},
-  allCodes: [],
+  countries: {
+    byCode: {},
+    allCodes: [],
+  },
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -36,14 +41,16 @@ export const reducer = (state = initialState, { type, payload }) => {
       };
 
     case FETCH_COUNTRIES_SUCCESS: {
-      const isFetching = false;
-      const { byCode, allCodes } = transformCountriesResponse(state, payload);
+      const { byCode, allCodes } = transformCountriesResponse(state.countries, payload);
 
       return {
         ...state,
-        byCode,
-        allCodes,
-        isFetching,
+        countries: {
+          ...state.countries,
+          byCode,
+          allCodes,
+        },
+        isFetching: false,
       };
     }
 
@@ -52,6 +59,23 @@ export const reducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetching: false,
       };
+
+    case UPDATE_POPULATION: {
+      const { country, population } = payload;
+      return {
+        ...state,
+        countries: {
+          ...state.countries,
+          byCode: {
+            ...state.countries.byCode,
+            [country]: {
+              ...state.countries.byCode[country],
+              population,
+            },
+          },
+        },
+      };
+    }
 
     default:
       return state;
@@ -66,5 +90,3 @@ export const epic = action$ => action$.pipe(
   map(data => fetchCountriesDataSuccess(data)),
   catchError(() => of(fetchCountriesDataFailure())),
 );
-
-export default reducer;

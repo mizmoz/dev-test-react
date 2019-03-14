@@ -28,11 +28,7 @@
         ]
       }
     ],
-    "import/no-extraneous-dependencies": 0,
-    "object-shorthand": [
-      2,
-      "consistent"
-    ]
+    "import/no-extraneous-dependencies": 0
   },
   "env": {
     "browser": true,

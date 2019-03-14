@@ -6,6 +6,7 @@ import createStore from '@store';
 import { fetchCountriesData } from '@store/modules/countries';
 import Layout from '@components/layout';
 import H1 from '@components/app/H1';
+import Form from './Form';
 
 // create the redux store
 const store = createStore();
@@ -19,6 +20,7 @@ export default () => (
         <H1>
           Good luck!
         </H1>
+        <Form />
       </Layout>
     </Theme>
   </Provider>
