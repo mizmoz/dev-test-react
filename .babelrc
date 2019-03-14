@@ -14,7 +14,7 @@
         "@api": "./src/api",
         "@components": "./src/components",
         "@config": "./src/config",
-        "@redux": "./src/redux"
+        "@store": "./src/store"
       }
     }]
   ]
