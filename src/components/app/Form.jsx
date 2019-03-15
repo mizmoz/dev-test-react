@@ -1,17 +1,36 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { updatePopulation } from '@store/modules/countries';
+import styled from 'styled-components';
+import { createPopulationRecord } from '@store/modules/countries';
+import Button from './Button';
 
-const Form = ({ countries, update }) => {
-  const [country, setCountry] = useState('');
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
+
+const Cell = styled.div`
+  display: flex;
+  align-items: center;
+  padding: ${props => props.theme.marginHalf} 0;
+  &:first-child {
+    flex: 1;
+  }
+  min-width: 75px;
+`;
+
+const Form = ({ countries, createRecord }) => {
+  const [country, setCountry] = useState({});
   const [population, setPopulation] = useState('');
 
   const { byCode, allCodes } = countries;
 
   const handleCountryChange = (code) => {
-    setCountry(code);
-    setPopulation(byCode[code].population);
+    const { name } = byCode[code];
+    setCountry({ code, name });
+    setPopulation('');
   };
 
   const handlePopulationChange = (value) => {
@@ -19,24 +38,44 @@ const Form = ({ countries, update }) => {
     setPopulation(Number.isNaN(parsedValue) ? 0 : parsedValue);
   };
 
+  const handleCreateRecord = () => {
+    if (!Number.isNaN(Number.parseInt(population, 10))) {
+      createRecord({ country, population });
+      setPopulation('');
+    }
+  };
+
   useEffect(() => {
-    if (!country && allCodes[0]) handleCountryChange(allCodes[0]);
+    if (!country.code && allCodes[0]) handleCountryChange(allCodes[0]);
   });
 
   return (
     <Fragment>
-      <select onChange={e => handleCountryChange(e.target.value)}>
-        {allCodes.map(code => (
-          <option key={code} value={code}>{byCode[code].name}</option>
-        ))}
-      </select>
-      <input name="population" value={population} onChange={e => handlePopulationChange(e.target.value)} onClick={e => e.target.select()} />
-      <button
-        type="submit"
-        onClick={() => update({ country, population })}
-      >
-        Update
-      </button>
+      <Row>
+        <Cell>
+          <select onChange={e => handleCountryChange(e.target.value)}>
+            {allCodes.map(code => (
+              <option key={code} value={code}>{byCode[code].name}</option>
+            ))}
+          </select>
+        </Cell>
+        <Cell>
+          <input
+            name="population"
+            value={population}
+            onChange={e => handlePopulationChange(e.target.value)}
+            onClick={e => e.target.select()}
+          />
+        </Cell>
+        <Cell>{' '}</Cell>
+        <Cell>
+          <Button
+            label="Submit"
+            type="submit"
+            onClick={() => handleCreateRecord()}
+          />
+        </Cell>
+      </Row>
     </Fragment>
   );
 };
@@ -49,14 +88,14 @@ Form.propTypes = {
     }),
     allCodes: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  update: PropTypes.func.isRequired,
+  createRecord: PropTypes.func.isRequired,
 };
 
 const Container = connect(
   state => ({
     countries: state.countries,
   }), {
-    update: updatePopulation,
+    createRecord: createPopulationRecord,
   },
 )(Form);
 

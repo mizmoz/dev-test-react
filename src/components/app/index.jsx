@@ -7,6 +7,7 @@ import { fetchCountriesData } from '@store/modules/countries';
 import Layout from '@components/layout';
 import H1 from '@components/app/H1';
 import Form from './Form';
+import Table from './Table';
 
 // create the redux store
 const store = createStore();
@@ -21,6 +22,7 @@ export default () => (
           Good luck!
         </H1>
         <Form />
+        <Table />
       </Layout>
     </Theme>
   </Provider>

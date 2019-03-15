@@ -13,16 +13,18 @@ import countriesApi from '@api/country';
 
 const prefix = createPrefix('countries');
 
-const FETCH_COUNTRIES = prefix('FETCH_COUNTRIES');
-const FETCH_COUNTRIES_SUCCESS = prefix('FETCH_COUNTRIES_SUCCESS');
-const FETCH_COUNTRIES_FAILURE = prefix('FETCH_COUNTRIES_FAILURE');
+const FETCH_DATA = prefix('FETCH_DATA');
+const FETCH_DATA_SUCCESS = prefix('FETCH_DATA_SUCCESS');
+const FETCH_DATA_FAILURE = prefix('FETCH_DATA_FAILURE');
 
-export const fetchCountriesData = createAction(FETCH_COUNTRIES);
-export const fetchCountriesDataSuccess = createAction(FETCH_COUNTRIES_SUCCESS);
-const fetchCountriesDataFailure = createAction(FETCH_COUNTRIES_FAILURE);
+export const fetchCountriesData = createAction(FETCH_DATA);
+export const fetchCountriesDataSuccess = createAction(FETCH_DATA_SUCCESS);
+const fetchCountriesDataFailure = createAction(FETCH_DATA_FAILURE);
 
-const UPDATE_POPULATION = prefix('UPDATE_POPULATION');
-export const updatePopulation = createAction(UPDATE_POPULATION);
+const CREATE_RECORD = prefix('CREATE_RECORD');
+const DELETE_RECORD = prefix('DELETE_RECORD');
+export const createPopulationRecord = createAction(CREATE_RECORD);
+export const deletePopulationRecord = createAction(DELETE_RECORD);
 
 export const initialState = {
   isFetching: false,
@@ -30,17 +32,18 @@ export const initialState = {
     byCode: {},
     allCodes: [],
   },
+  records: {},
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case FETCH_COUNTRIES:
+    case FETCH_DATA:
       return {
         ...state,
         isFetching: true,
       };
 
-    case FETCH_COUNTRIES_SUCCESS: {
+    case FETCH_DATA_SUCCESS: {
       const { byCode, allCodes } = transformCountriesResponse(state.countries, payload);
 
       return {
@@ -54,26 +57,29 @@ export const reducer = (state = initialState, { type, payload }) => {
       };
     }
 
-    case FETCH_COUNTRIES_FAILURE:
+    case FETCH_DATA_FAILURE:
       return {
         ...state,
         isFetching: false,
       };
 
-    case UPDATE_POPULATION: {
-      const { country, population } = payload;
+    case CREATE_RECORD: {
+      const { country: { code, name }, population } = payload;
       return {
         ...state,
-        countries: {
-          ...state.countries,
-          byCode: {
-            ...state.countries.byCode,
-            [country]: {
-              ...state.countries.byCode[country],
-              population,
-            },
-          },
+        records: {
+          ...state.records,
+          [code]: { code, name, population },
         },
+      };
+    }
+
+    case DELETE_RECORD: {
+      const { code } = payload;
+      const { [code]: deleted, ...rest } = state.records;
+      return {
+        ...state,
+        records: rest,
       };
     }
 
@@ -83,10 +89,16 @@ export const reducer = (state = initialState, { type, payload }) => {
 };
 
 export const epic = action$ => action$.pipe(
-  ofType(FETCH_COUNTRIES),
+  ofType(FETCH_DATA),
   mergeMap(() => defer(() => from(countriesApi())).pipe(
     retry(5),
   )),
   map(data => fetchCountriesDataSuccess(data)),
   catchError(() => of(fetchCountriesDataFailure())),
 );
+
+export const selectRecords = (state) => {
+  const { records } = state;
+  return Object.keys(records).map(key => records[key])
+    .sort((a, b) => b.population - a.population);
+};
