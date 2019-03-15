@@ -65,6 +65,7 @@ const Record = ({
       <Cell>
         <Button
           label="Delete"
+          color="quaternary"
           onClick={() => deleteRecord({ code })}
         />
       </Cell>

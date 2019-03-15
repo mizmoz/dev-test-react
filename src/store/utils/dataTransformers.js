@@ -3,7 +3,7 @@ export const transformCountriesResponse = (state, collection) => ({
   byCode: {
     ...state.byId,
     ...collection.reduce((acc, { code, ...rest }) => {
-      acc[code] = { code, population: 0, ...rest };
+      acc[code] = { code, ...rest };
       return acc;
     }, {}),
   },

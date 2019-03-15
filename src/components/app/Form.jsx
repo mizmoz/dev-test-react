@@ -91,12 +91,10 @@ Form.propTypes = {
   createRecord: PropTypes.func.isRequired,
 };
 
-const Container = connect(
+export default connect(
   state => ({
     countries: state.countries,
   }), {
     createRecord: createPopulationRecord,
   },
 )(Form);
-
-export { Form, Container as default };

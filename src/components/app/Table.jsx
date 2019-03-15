@@ -18,7 +18,7 @@ const Table = ({ records }) => (
         <Record {...country} />
       </Row>
     )) : (
-      <Row>No population records to display.</Row>
+      <div>No population records to display.</div>
     )}
   </Fragment>
 );
