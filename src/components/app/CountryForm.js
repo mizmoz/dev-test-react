@@ -1,6 +1,7 @@
 import React from 'react';
-import countries from '../../configs/country'
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import {ADD_POPULATION, addPopulation} from "./actions";
 
 const InputSection = styled.div`
   align-items: center;
@@ -24,12 +25,17 @@ const InputSection = styled.div`
   }
 `;
 
+const Error = styled.span`
+  color: red;
+`;
 
-export default class CountryForm extends React.PureComponent {
+
+class CountryForm extends React.PureComponent {
 
   state = {
-    country: '',
-    population: ''
+    country: this.props.countryList[0].name,
+    population: '',
+    error: '',
   };
 
   componentDidMount () {
@@ -46,21 +52,37 @@ export default class CountryForm extends React.PureComponent {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { country, population } = this.state;
+    if(!country || !population){
+      this.setState(() => ({error: 'please complete form'}));
+      return;
+    }
+    this.props.addCountry(this.state);
+    this.resetState();
+  }
+
+  resetState = () => {
+    this.setState(() => ({
+      country: this.props.countryList[0].name,
+      population: '',
+      error: '',
+    }))
   }
 
   render () {
-    const { country, population } = this.state;
+    const { country, population, error } = this.state;
+    const { countryList } = this.props;
     return (
-      <form action="" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <InputSection>
           <label htmlFor="country">Country</label>
           <select
             value={country}
-            onChange={this.handleChange}
             id="country"
             name="country"
+            onChange={this.handleChange}
           >
-            {countries.map(({name, code}) => (
+            {countryList.map(({name, code}) => (
               <option key={code}>{name}</option>
             ))}
           </select>
@@ -79,12 +101,24 @@ export default class CountryForm extends React.PureComponent {
         </InputSection>
 
         <InputSection>
-          <input type="submit" value="Submit"/>
+          <input type="submit" value="Add Population"/>
         </InputSection>
+        <Error>{error}</Error>
 
       </form>
     )
   }
 }
 
-// dispatch the submitedValue
+const mapStateToProps = (state) => ({
+  countryList: state.countryList,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  addCountry: (country) => dispatch(addPopulation(country))
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CountryForm)
