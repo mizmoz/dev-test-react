@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {DELETE_POPULATION} from "../../store/actions";
 
 const DeleteButton = styled.button`
@@ -39,6 +40,11 @@ export const PopulationList = ({populationList, deletePopulation}) => {
     </List>
   )
 };
+
+PopulationList.propTypes = {
+  countryList: PropTypes.array,
+  deletePopulation: PropTypes.func
+}
 
 const mapStateToProps = (state) => ({
   populationList: state.populationList

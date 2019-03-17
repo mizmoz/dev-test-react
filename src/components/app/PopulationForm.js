@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addPopulation } from "../../store/actions";
 
@@ -33,15 +34,16 @@ Error.displayName = 'Error';
 
 export class PopulationForm extends React.PureComponent {
 
+  static propTypes = {
+    countryList: PropTypes.array,
+    addPopulation: PropTypes.func
+  }
+
   state = {
     country: this.props.countryList[0].name,
     population: '',
     error: '',
   };
-
-  componentDidMount () {
-
-  }
 
   handleChange = (event) => {
     const stateKey = event.target.getAttribute('name');

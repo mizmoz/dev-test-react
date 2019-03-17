@@ -8,10 +8,11 @@
     "go": "yarn install && yarn run start",
     "go-npm": "npm install && npm run start",
     "build": "webpack --mode production",
-    "start": "webpack-dev-server --mode development --open --history-api-fallback"
+    "start": "webpack-dev-server --mode development --open --history-api-fallback",
+    "test": "yarn jest"
   },
   "dependencies": {
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.2",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
     "react-redux": "^5.0.7",
@@ -43,6 +44,8 @@
     "webpack-dev-server": "^3.1.8"
   },
   "jest": {
-    "setupFilesAfterEnv": ["<rootDir>src/setupTests.js"]
+    "setupFilesAfterEnv": [
+      "<rootDir>src/setupTests.js"
+    ]
   }
 }
