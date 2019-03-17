@@ -5,8 +5,8 @@ import Theme from '../theme';
 import createStore from '../../store';
 import Layout from '../layout';
 import H1 from './H1';
-import CountryForm from './CountryForm';
-import CountryList from './CountryList';
+import CountryForm from './PopulationForm';
+import CountryList from './PopulationList';
 
 // create the redux store
 const store = createStore();

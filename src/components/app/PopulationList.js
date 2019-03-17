@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {DELETE_POPULATION} from "./actions";
+import {DELETE_POPULATION} from "../../store/actions";
 
 const DeleteButton = styled.button`
   padding: 20px;
@@ -9,6 +9,7 @@ const DeleteButton = styled.button`
   color: white;
   border-radius: 5px;
 `;
+DeleteButton.displayName = 'DeleteButton';
 
 const List = styled.ul`
   list-style: none;
@@ -24,11 +25,11 @@ const List = styled.ul`
 `;
 
 
-const CountryList = ({populationList, deletePopulation}) => {
+export const PopulationList = ({populationList, deletePopulation}) => {
   return (
     <List>
       {populationList
-        .sort((a,b) =>(a - b))
+        .sort((a,b) =>(a.population - b.population))
         .map(({country, population}) => (
           <li key={country}>
             <span>Country: {country}<br/> Population: {population}</span>
@@ -51,4 +52,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CountryList)
+)(PopulationList)

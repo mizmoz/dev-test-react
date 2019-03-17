@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {ADD_POPULATION, addPopulation} from "./actions";
+import { addPopulation } from "../../store/actions";
 
 const InputSection = styled.div`
   align-items: center;
@@ -28,9 +28,10 @@ const InputSection = styled.div`
 const Error = styled.span`
   color: red;
 `;
+Error.displayName = 'Error';
 
 
-class CountryForm extends React.PureComponent {
+export class PopulationForm extends React.PureComponent {
 
   state = {
     country: this.props.countryList[0].name,
@@ -57,7 +58,8 @@ class CountryForm extends React.PureComponent {
       this.setState(() => ({error: 'please complete form'}));
       return;
     }
-    this.props.addCountry(this.state);
+
+    this.props.addPopulation({country, population});
     this.resetState();
   }
 
@@ -115,10 +117,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addCountry: (country) => dispatch(addPopulation(country))
+  addPopulation: (country) => dispatch(addPopulation(country))
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CountryForm)
+)(PopulationForm)
