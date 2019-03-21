@@ -7,7 +7,7 @@ import { style } from '../../configs/theme';
 const ButtonStyled = styled.button`
   background: ${props => props.theme.color[props.color]};
   border-radius: ${style('radius')};
-  box-shadow: ${style('shadow.small')};
+  box-shadow: none;
   border: none;
   color: ${props => props.theme.color[`${props.color}Alt`]};
 
@@ -20,7 +20,6 @@ const ButtonStyled = styled.button`
   padding: ${style('paddingHalf')};
   position: relative;
   text-decoration: none;
-  margin-left: ${style('marginHalf')};
 `;
 
 const Button = ({ label, ...props }) => (
@@ -32,7 +31,7 @@ const Button = ({ label, ...props }) => (
 Button.propTypes = {
   color: PropTypes.string,
   label: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   type: PropTypes.string,
 };
 

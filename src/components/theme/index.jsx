@@ -22,11 +22,12 @@ export default class Theme extends PureComponent {
       body {
         background-color: ${theme.color.background};
         font-size: ${theme.baseFontSize};
+        font-family: 'Oswald', sans-serif;
         margin: 0;
       }
       
       html {
-        padding: ${theme.padding};
+        padding: 0;
       }
       
       body {

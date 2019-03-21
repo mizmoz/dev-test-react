@@ -21,7 +21,7 @@ export const style = (name, defaultValue = '') => props => name.split('.').reduc
 export default {
   baseFontSize: '16px',
 
-  baseFontFamily: '\'Source Sans Pro\', sans-serif',
+  baseFontFamily: 'Arial, Helvetica, sans-serif',
   baseFontWeight: 400,
   headerFontFamily: '\'Oswald\', sans-serif',
   headerFontWeight: 300,
@@ -41,7 +41,7 @@ export default {
   paddingDouble: `${ratio * 2}rem`,
 
   border: {
-    component: '1px solid #EFF1F2',
+    component: '1px solid #2B3A42',
     componentThick: '1px solid #EFF1F2',
   },
 
@@ -49,19 +49,20 @@ export default {
     /**
      * Style Colours
      */
-    background: '#EFF1F2',
-    baseFont: '#5e6168',
-    headerFont: '#2A2D34',
+    background: '#F0F0DF',
+    baseFont: '#333333',
+    headerFont: '#FF9000',
     anchor: '#F46357',
+    error: '#DE231C',
 
     // default component color, this is used for nav, panels, reports etc
-    component: '#FFFFFF',
+    component: '#F0F0DF',
     componentAlt: '#f7f7f7',
 
-    primary: '#78CD51',
-    primaryAlt: '#FFFFFF',
-    secondary: '#00CEFD',
-    secondaryAlt: '#FFFFFF',
+    primary: '#2B3A42',
+    primaryAlt: '#FF9000',
+    secondary: '#3F5866',
+    secondaryAlt: '#BDD3DE',
     tertiary: '#BEC3C7',
     tertiaryAlt: '#FFFFFF',
     quaternary: '#F46357',
@@ -70,10 +71,11 @@ export default {
 
   fontSize: {
     h1: '4.25rem',
-    h2: '2.5rem',
-    h3: '1.75rem',
-    h4: '1.375rem',
+    h2: '1.5rem',
+    h3: '1.2rem',
+    h4: '1.1rem',
     normal: '1rem',
+    small: '0.75rem'
   },
 
   shadow: {

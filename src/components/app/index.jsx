@@ -1,10 +1,11 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Provider } from 'react-redux';
 import Theme from '../theme';
 import createStore from '../../store';
+import HeaderSection from '../header';
 import Layout from '../layout';
-import H1 from './H1';
+import PopulationFrom from '../population-form';
 
 // create the redux store
 const store = createStore();
@@ -12,11 +13,12 @@ const store = createStore();
 export default () => (
   <Provider store={store}>
     <Theme>
-      <Layout>
-        <H1>
-          Good luck!
-        </H1>
-      </Layout>
+      <Fragment>
+        <HeaderSection />
+        <Layout>
+          <PopulationFrom />
+        </Layout>
+      </Fragment>
     </Theme>
   </Provider>
 );
