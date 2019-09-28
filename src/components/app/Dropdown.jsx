@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Dropdown({ items }) {
+function Dropdown({ items, onChange }) {
   return (
-    <select>
-        {items.map((i) => {
-          return (<option key={i.code} value={i.code}>{i.name}</option>);
+    <select onChange={(evt) => onChange(evt.target.value)}>
+        {items.map((item) => {
+          const { isSelected } = item; 
+          return (
+            <option
+              key={item.code}
+              value={item.code}
+              selected={isSelected}
+            >
+              {item.name}
+            </option>
+          );
         })}
     </select>
   );
@@ -13,10 +22,12 @@ function Dropdown({ items }) {
 
 Dropdown.propTypes = {
   items: PropTypes.array,
+  onChange: PropTypes.func,
 };
 
 Dropdown.defaultProps = {
   items: [],
+  onChange: () => {},
 };
 
 export default Dropdown;

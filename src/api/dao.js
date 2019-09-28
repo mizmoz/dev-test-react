@@ -19,7 +19,7 @@ export const retryPromise = (fn, ms = 250, maxRetries=5) => {
               if(retries === maxRetries) {
                   return reject('maximum retries exceeded');
               }
-              retryFetch(fn, ms).then(resolve);
+              retryPromise(fn, ms).then(resolve);
           }, ms);
       });
   });

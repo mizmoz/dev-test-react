@@ -7,6 +7,7 @@ import {
   UPDATE_COUNTRIES,
   UPDATE_COUNTRY,
   DELETE_COUNTRY,
+  SELECT_COUNTRY,
 } from './actions';
 
 export const getInitialState = () => ({
@@ -46,12 +47,26 @@ export const updateCountry = (state, action) => {
   return state;
 };
 
+export const selectCountry = (state, action) => {
+  if (action) {
+    const { countryId } = action;
+    const countries = state.countries.map((c) => {
+      const isSelected = c.code === countryId;
+      return { ...c, isSelected };
+    });
+
+    return { ...state, countries };   
+  }
+  
+  return state;
+};
+
 export const deleteCountry = (state, action) => {
   if (action) {
-    const { country } = action;
+    const { countryId } = action;
     const countries = state.countries.filter((c) => {
       //  is it the country we're removing
-      return c.code !== country.code;
+      return c.code !== countryId;
     });
 
     return { ...state, countries };   
@@ -68,6 +83,8 @@ export default (state, action) => {
       return updateCountry(state, action);
     case DELETE_COUNTRY:
       return deleteCountry(state, action);
+    case SELECT_COUNTRY:
+      return selectCountry(state, action);
     default:
       return state;
   }

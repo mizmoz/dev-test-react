@@ -7,8 +7,10 @@ import {
   updateCountries,
   updateCountry,
   deleteCountry,
+  selectCountry,
 } from '../../store/actions';
 import Dropdown from './Dropdown';
+import Editor from './Editor';
 
 class Container extends PureComponent {
   componentDidMount() {
@@ -19,12 +21,34 @@ class Container extends PureComponent {
       .catch(console.error);
   }
 
+  onCountrySelected = (countryId) => {
+    this.props.selectCountry(countryId);
+  }
+
+  onCountryUpdated = (country) => {
+    this.props.updateCountry(country);
+  }
+
+  onCountryDeleted = (countryId) => {
+    this.props.deleteCountry(countryId);
+  }
+
   render() {
-    const { countries } = this.props;
+    const { countries, selectedCountry } = this.props;
 
     return (
       <div>
-        <Dropdown items={countries} />
+        <Dropdown
+          items={countries}
+          onChange={this.onCountrySelected}
+        />
+        {selectedCountry && (
+          <Editor
+            country={selectedCountry}
+            onSubmit={this.onCountryUpdated}
+            onDelete={this.onCountryDeleted}
+          />
+        )}
       </div>
     );
   }
@@ -32,6 +56,7 @@ class Container extends PureComponent {
 
 Container.propTypes = {
   countries: PropTypes.array,
+  selectedCountry: PropTypes.object,
   updateCountries: PropTypes.func.isRequired,
   updateCountry: PropTypes.func.isRequired,
   deleteCountry: PropTypes.func.isRequired,
@@ -39,15 +64,18 @@ Container.propTypes = {
 
 Container.defaultProps = {
   countries: [],
+  selectedCountry: null,
 };
 
 export const mapStateToProps = ({ countries }) => {
   console.log('mapStateToProps', countries);
-  return { countries };
+  const selectedCountry = countries.find((c) => c.isSelected);
+
+  return { countries, selectedCountry };
 }
 
 export const mapDispatchToProps = {
-  updateCountries, updateCountry, deleteCountry,
+  updateCountries, updateCountry, deleteCountry, selectCountry,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Container);

@@ -18,9 +18,19 @@ export const updateCountry = (country) => {
 
 export const DELETE_COUNTRY = 'DELETE_COUNTRY';
 
-export const deleteCountry = (country) => {
+export const deleteCountry = (countryId) => {
   return {
     type: DELETE_COUNTRY,
-    country,
+    countryId,
+  };
+}
+
+
+export const SELECT_COUNTRY = 'SELECT_COUNTRY';
+
+export const selectCountry = (countryId) => {
+  return {
+    type: SELECT_COUNTRY,
+    countryId,
   };
 }
