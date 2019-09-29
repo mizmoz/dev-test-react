@@ -6,6 +6,9 @@ function Dropdown({ items, onChange }) {
     <select onChange={(evt) => onChange(evt.target.value)}>
         {items.map((item) => {
           const { isSelected } = item; 
+          const renderedPop = (item.hasOwnProperty('population')) ? 
+            ` - pop: ${item.population}` : '';
+
           return (
             <option
               key={item.code}
@@ -13,6 +16,7 @@ function Dropdown({ items, onChange }) {
               selected={isSelected}
             >
               {item.name}
+              {renderedPop}
             </option>
           );
         })}

@@ -14,7 +14,6 @@ class Editor extends Component {
     if (country.code !== state.code) {
       //  we've changed country, update state
       //  make sure we have some population
-      console.log(country);
       if (!country.population) {
         country.population = 0;
       }
@@ -32,8 +31,9 @@ class Editor extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { code, name, population } = this.state;
-    this.props.onSubmit({ code, name, population });
+    //  TODO: for now we can just spread state, as we don't have non-country
+    //  props keys in it
+    this.props.onSubmit({...this.state});
   }
 
   onDelete = () => {
@@ -63,7 +63,7 @@ class Editor extends Component {
             type="input"
             name="population"
             value={population}
-            onChange={(e) => this.onInputChange('population', e.target.value)}
+            onChange={(e) => this.onInputChange('population', +e.target.value)}
           />
           <button type="submit">Update</button>
           <input

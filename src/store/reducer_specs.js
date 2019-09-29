@@ -6,6 +6,8 @@ import {
   updateCountry,
   deleteCountry,
   selectCountry,
+  sortByPopulation,
+  sortCountries,
 } from './reducer';
 import * as actions from './actions';
 import makeStore from './index';
@@ -117,6 +119,35 @@ describe('Country reducer - ', () => {
     });
   });
 
+  describe('sortByPopulation()', () => {
+    it('should sort by population', () => {
+      let countries = [{ population: 0 },
+        { population: 2000 }, { population: 100 }];
+      let result = countries.sort(sortByPopulation);
+      expect(result[0].population).to.equal(2000);
+
+      countries = [{},
+        { population: 2000 }, { population: 100 }];
+      result = countries.sort(sortByPopulation);
+      expect(result[0].population).to.equal(2000);
+    });
+  });
+
+  describe('sortCountries', () => {
+    it('should sort countries', () => {
+      let state = getInitialState();
+
+      //  insert mock data into state
+      const countriesSample = [{}, { population: 1000 }, { population: 2000 }];
+      state = updateCountries(state, { countries: countriesSample });
+      expect(state.countries.length).to.equal(3);
+
+      state = sortCountries(state);
+      expect(state.countries[0].population).to.equal(2000);
+      expect(state.countries[1].population).to.equal(1000);
+    });
+  });
+
   describe('reduce()', () => {
     let store;
 
@@ -155,15 +186,15 @@ describe('Country reducer - ', () => {
       action = actions.updateCountry(modifiedCountry);
       store.dispatch(action);
       state = store.getState();
-      expect(state.countries[2].population).to.equal(200);
+      expect(state.countries[0].population).to.equal(200);
 
       modifiedCountry = {...countriesSample[3]};
       modifiedCountry.population = 300;
       action = actions.updateCountry(modifiedCountry);
       store.dispatch(action);
       state = store.getState();
-      expect(state.countries[2].population).to.equal(200);
-      expect(state.countries[3].population).to.equal(300);
+      expect(state.countries[1].population).to.equal(200);
+      expect(state.countries[0].population).to.equal(300);
     });
 
     it('should handle DELETE_COUNTRY', () => {

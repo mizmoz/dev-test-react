@@ -23,6 +23,27 @@ export const updateCountries = (state, action) => {
   return state;
 };
 
+
+export const sortByPopulation = (a, b) => {
+  const populationA = a.hasOwnProperty('population')? a.population : 0;
+  const populationB = b.hasOwnProperty('population')? b.population : 0;
+  
+  if (populationA < populationB) {
+    return 1;
+  }
+  if (populationA > populationB) {
+    return -1;
+  }
+  return 0;
+}
+
+export const sortCountries = (state) => {
+  const countries = state.countries.slice();
+  countries.sort(sortByPopulation);
+
+  return { ...state, countries };   
+}
+
 export const updateCountry = (state, action) => {
   if (action) {
     const { country } = action;
@@ -80,7 +101,8 @@ export default (state, action) => {
     case UPDATE_COUNTRIES:
       return updateCountries(state, action);
     case UPDATE_COUNTRY:
-      return updateCountry(state, action);
+      const newState = updateCountry(state, action);
+      return sortCountries(newState);
     case DELETE_COUNTRY:
       return deleteCountry(state, action);
     case SELECT_COUNTRY:

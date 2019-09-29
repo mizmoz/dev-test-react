@@ -36,6 +36,11 @@ class Container extends PureComponent {
   render() {
     const { countries, selectedCountry } = this.props;
 
+    const isLoading = countries.length === 0;
+    if (isLoading) {
+      return <div>Loading countries...</div>
+    }
+
     return (
       <div>
         <Dropdown
@@ -68,7 +73,7 @@ Container.defaultProps = {
 };
 
 export const mapStateToProps = ({ countries }) => {
-  console.log('mapStateToProps', countries);
+  //  find selected country  
   const selectedCountry = countries.find((c) => c.isSelected);
 
   return { countries, selectedCountry };
