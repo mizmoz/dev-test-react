@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 function Dropdown({ items, onChange }) {
   return (
     <select onChange={evt => onChange(evt.target.value)}>
+      <option value="" disabled selected>Select country</option>
       {items.map((item) => {
         const { isSelected } = item;
         const renderedPop = (item.population !== undefined)
