@@ -16,13 +16,14 @@ class Editor extends Component {
     //  country code has changed
     const { country } = props;
     if (country.code !== state.code) {
+      const newState = { ...country };
+
       //  we've changed country, update state
       //  make sure we have some population
-      if (!country.population) {
-        country.population = 0;
+      if (!newState.population) {
+        newState.population = 0;
       }
-
-      return { ...country };
+      return newState;
     }
 
     return state;
