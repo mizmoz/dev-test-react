@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Button from './Button';
+import Label from './Label';
+import Input from './Input';
+
 class Editor extends Component {
   state = {
     code: '',
@@ -53,23 +57,31 @@ class Editor extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          type="input"
-          name="name"
-          value={name}
-          onChange={e => this.onInputChange('name', e.target.value)}
+        <Label label="Name" htmlFor="name">
+          <Input
+            type="input"
+            name="name"
+            value={name}
+            onChange={e => this.onInputChange('name', e.target.value)}
+          />
+        </Label>
+        <Label label="Population" htmlFor="population">
+          <Input
+            type="input"
+            name="population"
+            value={population}
+            onChange={e => this.onInputChange('population', +e.target.value)}
+          />
+        </Label>
+        <Button
+          label="Update"
+          type="submit"
         />
-        <input
-          type="input"
-          name="population"
-          value={population}
-          onChange={e => this.onInputChange('population', +e.target.value)}
-        />
-        <button type="submit">Update</button>
-        <input
+        <Button
           type="button"
-          value="Delete"
+          label="Delete"
           onClick={this.onDelete}
+          color="quaternary"
         />
       </form>
     );

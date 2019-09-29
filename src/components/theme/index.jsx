@@ -61,7 +61,13 @@ Theme.propTypes = {
   /**
    * Theme config
    */
-  theme: PropTypes.objectOf(PropTypes.string),
+  theme: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.object,
+    ]),
+  ),
 };
 
 Theme.defaultProps = {
