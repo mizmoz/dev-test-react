@@ -14,6 +14,7 @@ export default () => (
   <Provider store={store}>
     <Theme>
       <Layout>
+        <H1>Countries</H1>
         <Container />
       </Layout>
     </Theme>

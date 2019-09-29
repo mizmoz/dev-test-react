@@ -1,36 +1,28 @@
 export const UPDATE_COUNTRIES = 'UPDATE_COUNTRIES';
 
 export const updateCountries = (countries) => {
-  return {
-    type: UPDATE_COUNTRIES,
-    countries,
-  };
-}
+  const type = UPDATE_COUNTRIES;
+  return { type, countries };
+};
 
 export const UPDATE_COUNTRY = 'UPDATE_COUNTRY';
 
 export const updateCountry = (country) => {
-  return {
-    type: UPDATE_COUNTRY,
-    country,
-  };
-}
+  const type = UPDATE_COUNTRY;
+  return { type, country };
+};
 
 export const DELETE_COUNTRY = 'DELETE_COUNTRY';
 
 export const deleteCountry = (countryId) => {
-  return {
-    type: DELETE_COUNTRY,
-    countryId,
-  };
-}
+  const type = DELETE_COUNTRY;
+  return { type, countryId };
+};
 
 
 export const SELECT_COUNTRY = 'SELECT_COUNTRY';
 
 export const selectCountry = (countryId) => {
-  return {
-    type: SELECT_COUNTRY,
-    countryId,
-  };
-}
+  const type = SELECT_COUNTRY;
+  return { type, countryId };
+};

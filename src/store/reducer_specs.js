@@ -1,3 +1,5 @@
+/* eslint no-unused-expressions: 0 */
+/* eslint import/no-extraneous-dependencies: 0 */
 import { expect } from 'chai';
 
 import {
@@ -17,7 +19,7 @@ describe('Country reducer - ', () => {
   describe('getInitialState()', () => {
     it('should return empty country list', () => {
       const result = getInitialState();
-      expect(result.hasOwnProperty('countries')).to.be.true;
+      expect(result.countries).not.to.be.undefined;
       expect(result.countries.length).to.equal(0);
     });
   });
@@ -43,26 +45,26 @@ describe('Country reducer - ', () => {
   describe('updateCountry()', () => {
     it('should update correct country', () => {
       let state = getInitialState();
-      
+
       //  insert mock data into state
-      const countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       state = updateCountries(state, { countries: countriesSample });
       expect(state.countries.length).to.equal(5);
 
       //  modify one of the countries, making shallow copy first
-      let modifiedCountry = {...countriesSample[2]};
+      let modifiedCountry = { ...countriesSample[2] };
       modifiedCountry.population = 200;
       let action = { country: modifiedCountry };
-      state = updateCountry(state, action)
+      state = updateCountry(state, action);
       expect(state.countries[2].population).to.equal(200);
       expect(state.countries.length).to.equal(5);
 
       //  make sure the not update props are kept
-      modifiedCountry = {...state.countries[2]};
+      modifiedCountry = { ...state.countries[2] };
       delete modifiedCountry.population;
       modifiedCountry.foo = 'bar';
       action = { country: modifiedCountry };
-      state = updateCountry(state, action)
+      state = updateCountry(state, action);
       expect(state.countries[2].foo).to.equal('bar');
       expect(state.countries[2].population).to.equal(200);
       expect(state.countries.length).to.equal(5);
@@ -74,7 +76,7 @@ describe('Country reducer - ', () => {
       let state = getInitialState();
 
       //  insert mock data into state
-      const countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       state = updateCountries(state, { countries: countriesSample });
       expect(state.countries.length).to.equal(5);
 
@@ -83,13 +85,13 @@ describe('Country reducer - ', () => {
       state = deleteCountry(state, action);
       expect(state.countries.length).to.equal(4);
 
-      removeCountry = countriesSample[1];
+      removeCountry = countriesSample[1]; /* eslint-disable-line prefer-destructuring */
       action = { countryId: removeCountry.code };
       state = deleteCountry(state, action);
       expect(state.countries.length).to.equal(3);
 
       //  should ignore invalid data
-      removeCountry = {foo: 'bar'};
+      removeCountry = { foo: 'bar' };
       action = { countryId: removeCountry.code };
       state = deleteCountry(state, action);
       expect(state.countries.length).to.equal(3);
@@ -101,7 +103,7 @@ describe('Country reducer - ', () => {
       let state = getInitialState();
 
       //  insert mock data into state
-      const countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       state = updateCountries(state, { countries: countriesSample });
       expect(state.countries.length).to.equal(5);
 
@@ -111,7 +113,7 @@ describe('Country reducer - ', () => {
       expect(state.countries[2].isSelected).to.be.true;
       expect(state.countries[1].isSelected).to.be.false;
 
-      selectedCountry = countriesSample[3];
+      selectedCountry = countriesSample[3]; /* eslint-disable-line prefer-destructuring */
       action = { countryId: selectedCountry.code };
       state = selectCountry(state, action);
       expect(state.countries[3].isSelected).to.be.true;
@@ -121,14 +123,15 @@ describe('Country reducer - ', () => {
 
   describe('sortByPopulation()', () => {
     it('should sort by population', () => {
-      let countries = [{ population: 0 },
+      let sampleCountries = [{ population: 0 },
         { population: 2000 }, { population: 100 }];
-      let result = countries.sort(sortByPopulation);
+      let result = sampleCountries.sort(sortByPopulation);
       expect(result[0].population).to.equal(2000);
 
-      countries = [{},
+      sampleCountries = [{},
         { population: 2000 }, { population: 100 }];
-      result = countries.sort(sortByPopulation);
+      result = sampleCountries.sort(sortByPopulation);
+      console.log(result);
       expect(result[0].population).to.equal(2000);
     });
   });
@@ -157,14 +160,14 @@ describe('Country reducer - ', () => {
 
     it('should handle UPDATE_COUNTRIES', () => {
       //  insert mock data into state
-      let countriesSample = countries.slice(0, 5); 
+      let countriesSample = countries.slice(0, 5);
       let action = actions.updateCountries(countriesSample);
       store.dispatch(action);
 
       let state = store.getState();
       expect(state.countries.length).to.equal(5);
 
-      countriesSample = countries.slice(15, 115); 
+      countriesSample = countries.slice(15, 115);
       action = actions.updateCountries(countriesSample);
       store.dispatch(action);
 
@@ -174,21 +177,21 @@ describe('Country reducer - ', () => {
 
     it('should handle UPDATE_COUNTRY', () => {
       //  insert mock data into state
-      let countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       let action = actions.updateCountries(countriesSample);
       store.dispatch(action);
 
       let state = store.getState();
       expect(state.countries.length).to.equal(5);
 
-      let modifiedCountry = {...countriesSample[2]};
+      let modifiedCountry = { ...countriesSample[2] };
       modifiedCountry.population = 200;
       action = actions.updateCountry(modifiedCountry);
       store.dispatch(action);
       state = store.getState();
       expect(state.countries[0].population).to.equal(200);
 
-      modifiedCountry = {...countriesSample[3]};
+      modifiedCountry = { ...countriesSample[3] };
       modifiedCountry.population = 300;
       action = actions.updateCountry(modifiedCountry);
       store.dispatch(action);
@@ -199,7 +202,7 @@ describe('Country reducer - ', () => {
 
     it('should handle DELETE_COUNTRY', () => {
       //  insert mock data into state
-      let countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       let action = actions.updateCountries(countriesSample);
       store.dispatch(action);
 
@@ -212,14 +215,14 @@ describe('Country reducer - ', () => {
       state = store.getState();
       expect(state.countries.length).to.equal(4);
 
-      removeCountry = countriesSample[3];
+      removeCountry = countriesSample[3]; /* eslint-disable-line prefer-destructuring */
       action = actions.deleteCountry(removeCountry.code);
       store.dispatch(action);
       state = store.getState();
       expect(state.countries.length).to.equal(3);
 
       //  cannot remove the same country twice
-      removeCountry = countriesSample[3];
+      removeCountry = countriesSample[3]; /* eslint-disable-line prefer-destructuring */
       action = actions.deleteCountry(removeCountry.code);
       store.dispatch(action);
       state = store.getState();
@@ -228,7 +231,7 @@ describe('Country reducer - ', () => {
 
     it('should handle SELECT_COUNTRY', () => {
       //  insert mock data into state
-      let countriesSample = countries.slice(0, 5); 
+      const countriesSample = countries.slice(0, 5);
       let action = actions.updateCountries(countriesSample);
       store.dispatch(action);
 
@@ -242,7 +245,7 @@ describe('Country reducer - ', () => {
       expect(state.countries[2].isSelected).to.be.true;
       expect(state.countries[1].isSelected).to.be.false;
 
-      selectedCountry = countriesSample[3];
+      selectedCountry = countriesSample[3]; /* eslint-disable-line prefer-destructuring */
       action = actions.selectCountry(selectedCountry.code);
       store.dispatch(action);
       state = store.getState();
@@ -250,4 +253,4 @@ describe('Country reducer - ', () => {
       expect(state.countries[3].isSelected).to.be.true;
     });
   });
-})
+});

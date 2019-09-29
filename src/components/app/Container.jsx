@@ -16,21 +16,21 @@ class Container extends PureComponent {
   componentDidMount() {
     fetchCountries()
       .then((countries) => {
-        this.props.updateCountries(countries);
+        this.props.updateCountries(countries); /* eslint-disable-line react/destructuring-assignment */
       })
       .catch(console.error);
   }
 
   onCountrySelected = (countryId) => {
-    this.props.selectCountry(countryId);
+    this.props.selectCountry(countryId); /* eslint-disable-line react/destructuring-assignment */
   }
 
   onCountryUpdated = (country) => {
-    this.props.updateCountry(country);
+    this.props.updateCountry(country); /* eslint-disable-line react/destructuring-assignment */
   }
 
   onCountryDeleted = (countryId) => {
-    this.props.deleteCountry(countryId);
+    this.props.deleteCountry(countryId); /* eslint-disable-line react/destructuring-assignment */
   }
 
   render() {
@@ -38,7 +38,7 @@ class Container extends PureComponent {
 
     const isLoading = countries.length === 0;
     if (isLoading) {
-      return <div>Loading countries...</div>
+      return <div>Loading countries...</div>;
     }
 
     return (
@@ -60,11 +60,16 @@ class Container extends PureComponent {
 }
 
 Container.propTypes = {
-  countries: PropTypes.array,
-  selectedCountry: PropTypes.object,
+  countries: PropTypes.arrayOf(PropTypes.object),
+  selectedCountry: PropTypes.shape({
+    code: PropTypes.string,
+    name: PropTypes.string,
+    population: PropTypes.number,
+  }),
   updateCountries: PropTypes.func.isRequired,
   updateCountry: PropTypes.func.isRequired,
   deleteCountry: PropTypes.func.isRequired,
+  selectCountry: PropTypes.func.isRequired,
 };
 
 Container.defaultProps = {
@@ -73,11 +78,11 @@ Container.defaultProps = {
 };
 
 export const mapStateToProps = ({ countries }) => {
-  //  find selected country  
-  const selectedCountry = countries.find((c) => c.isSelected);
+  //  find selected country
+  const selectedCountry = countries.find(c => c.isSelected);
 
   return { countries, selectedCountry };
-}
+};
 
 export const mapDispatchToProps = {
   updateCountries, updateCountry, deleteCountry, selectCountry,

@@ -18,7 +18,7 @@ class Editor extends Component {
         country.population = 0;
       }
 
-      return {...country};
+      return { ...country };
     }
 
     return state;
@@ -29,65 +29,65 @@ class Editor extends Component {
   }
 
   onSubmit = (e) => {
+    const { onSubmit } = this.props;
     e.preventDefault();
 
     //  TODO: for now we can just spread state, as we don't have non-country
     //  props keys in it
-    this.props.onSubmit({...this.state});
+    onSubmit({ ...this.state });
   }
 
   onDelete = () => {
-    console.log('onDelete');
     const { country, onDelete } = this.props;
 
     //  ask for confirmation using browser native window
-    const isConfirmed = confirm(`Are you sure you want to delete ${country.name}`);
+    const isConfirmed = window.confirm(`Are you sure you want to delete ${country.name}`);
 
     if (isConfirmed) {
-      this.props.onDelete(country.code);  
+      onDelete(country.code);
     }
   }
 
   render() {
-    const { code, name, population } = this.state;
-    
+    const { name, population } = this.state;
+
     return (
       <form onSubmit={this.onSubmit}>
-          <input
-            type="input"
-            name="name"
-            value={name}
-            onChange={(e) => this.onInputChange('name', e.target.value)}
-          />
-          <input
-            type="input"
-            name="population"
-            value={population}
-            onChange={(e) => this.onInputChange('population', +e.target.value)}
-          />
-          <button type="submit">Update</button>
-          <input
-            type="button"
-            value="Delete"
-            onClick={this.onDelete}
-          />
+        <input
+          type="input"
+          name="name"
+          value={name}
+          onChange={e => this.onInputChange('name', e.target.value)}
+        />
+        <input
+          type="input"
+          name="population"
+          value={population}
+          onChange={e => this.onInputChange('population', +e.target.value)}
+        />
+        <button type="submit">Update</button>
+        <input
+          type="button"
+          value="Delete"
+          onClick={this.onDelete}
+        />
       </form>
     );
   }
 }
 
 Editor.propTypes = {
-  code: PropTypes.string,
-  name: PropTypes.string,
-  population: PropTypes.number,
+  country: PropTypes.shape({
+    code: PropTypes.string,
+    name: PropTypes.string,
+    population: PropTypes.number,
+  }),
   onSubmit: PropTypes.func,
   onDelete: PropTypes.func,
 };
 
 Editor.defaultProps = {
-  code: '',
-  name: '',
-  population: 0,
+  country: null,
   onSubmit: () => {},
   onDelete: () => {},
 };

@@ -1,5 +1,5 @@
 /*
-  In real world application, we'd probably have a countriesReducer 
+  In real world application, we'd probably have a countriesReducer
   to take care of all the countries operation
   and use ImmutableJS or similar to make the state operations bit simpler
 */
@@ -25,9 +25,9 @@ export const updateCountries = (state, action) => {
 
 
 export const sortByPopulation = (a, b) => {
-  const populationA = a.hasOwnProperty('population')? a.population : 0;
-  const populationB = b.hasOwnProperty('population')? b.population : 0;
-  
+  const populationA = (a.population !== undefined) ? a.population : 0;
+  const populationB = (b.population !== undefined) ? b.population : 0;
+
   if (populationA < populationB) {
     return 1;
   }
@@ -35,14 +35,14 @@ export const sortByPopulation = (a, b) => {
     return -1;
   }
   return 0;
-}
+};
 
 export const sortCountries = (state) => {
   const countries = state.countries.slice();
   countries.sort(sortByPopulation);
 
-  return { ...state, countries };   
-}
+  return { ...state, countries };
+};
 
 export const updateCountry = (state, action) => {
   if (action) {
@@ -62,9 +62,9 @@ export const updateCountry = (state, action) => {
       return c;
     });
 
-    return { ...state, countries };   
+    return { ...state, countries };
   }
-  
+
   return state;
 };
 
@@ -76,21 +76,18 @@ export const selectCountry = (state, action) => {
       return { ...c, isSelected };
     });
 
-    return { ...state, countries };   
+    return { ...state, countries };
   }
-  
+
   return state;
 };
 
 export const deleteCountry = (state, action) => {
   if (action) {
     const { countryId } = action;
-    const countries = state.countries.filter((c) => {
-      //  is it the country we're removing
-      return c.code !== countryId;
-    });
+    const countries = state.countries.filter(c => c.code !== countryId);
 
-    return { ...state, countries };   
+    return { ...state, countries };
   }
 
   return state;
@@ -101,8 +98,7 @@ export default (state, action) => {
     case UPDATE_COUNTRIES:
       return updateCountries(state, action);
     case UPDATE_COUNTRY:
-      const newState = updateCountry(state, action);
-      return sortCountries(newState);
+      return sortCountries(updateCountry(state, action));
     case DELETE_COUNTRY:
       return deleteCountry(state, action);
     case SELECT_COUNTRY:
