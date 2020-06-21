@@ -1,4 +1,3 @@
-
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { injectGlobal, ThemeProvider } from 'styled-components';
@@ -23,6 +22,7 @@ export default class Theme extends PureComponent {
         background-color: ${theme.color.background};
         font-size: ${theme.baseFontSize};
         margin: 0;
+        font-family: ${theme.headerFontFamily};
       }
       
       html {
@@ -47,11 +47,7 @@ export default class Theme extends PureComponent {
    */
   render = () => {
     const { children, theme } = this.props;
-    return (
-      <ThemeProvider theme={theme}>
-        {children}
-      </ThemeProvider>
-    );
+    return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
   };
 }
 
@@ -61,9 +57,9 @@ Theme.propTypes = {
   /**
    * Theme config
    */
-  theme: PropTypes.object,
+  theme: PropTypes.object
 };
 
 Theme.defaultProps = {
-  theme: defaultTheme,
+  theme: defaultTheme
 };

@@ -1,11 +1,13 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { style } from '../../configs/theme';
 
 const ButtonStyled = styled.button`
-  background: ${props => props.theme.color[props.color]};
+  background: ${props =>
+    props.disabled === true
+      ? props.theme.color['disabled']
+      : props.theme.color[props.color]};
   border-radius: ${style('radius')};
   box-shadow: ${style('shadow.small')};
   border: none;
@@ -24,21 +26,19 @@ const ButtonStyled = styled.button`
 `;
 
 const Button = ({ label, ...props }) => (
-  <ButtonStyled {...props}>
-    {label}
-  </ButtonStyled>
+  <ButtonStyled {...props}>{label}</ButtonStyled>
 );
 
 Button.propTypes = {
   color: PropTypes.string,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
-  type: PropTypes.string,
+  type: PropTypes.string
 };
 
 Button.defaultProps = {
   color: 'primary',
-  type: 'button',
+  type: 'button'
 };
 
 export default Button;
