@@ -1,4 +1,4 @@
-
+/* eslint no-unused-expressions: 0 */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { injectGlobal, ThemeProvider } from 'styled-components';
@@ -61,7 +61,13 @@ Theme.propTypes = {
   /**
    * Theme config
    */
-  theme: PropTypes.object,
+  theme: PropTypes.objectOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+      PropTypes.object,
+    ]),
+  ),
 };
 
 Theme.defaultProps = {
