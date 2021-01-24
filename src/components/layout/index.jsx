@@ -12,6 +12,12 @@ export const Row = styled.div`
 
 export default styled.div`
   width: 100%;
-  max-width: ${style('width.max')};
+  height: 100%;
   margin: auto;
+  display: flex;
+  flex-direction: row;
+  
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+  }
 `;

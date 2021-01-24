@@ -23,20 +23,46 @@ export default class Theme extends PureComponent {
         background-color: ${theme.color.background};
         font-size: ${theme.baseFontSize};
         margin: 0;
-      }
-      
-      html {
-        padding: ${theme.padding};
+        height: 100%;
       }
       
       body {
         padding: 0;
+      }
+
+      #app {
+        height: 100%;
       }
       
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+      }
+      
+      .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  /* Preferred icon size */
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+      
+        /* Support for all WebKit browsers. */
+        -webkit-font-smoothing: antialiased;
+        /* Support for Safari and Chrome. */
+        text-rendering: optimizeLegibility;
+      
+        /* Support for Firefox. */
+        -moz-osx-font-smoothing: grayscale;
+      
+        /* Support for IE. */
+        font-feature-settings: 'liga';
       }
     `;
   }

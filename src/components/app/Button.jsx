@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { style } from '../../configs/theme';
 
 const ButtonStyled = styled.button`
-  background: ${props => props.theme.color[props.color]};
+  background: ${props => !props.disabled ? props.theme.color[props.color]: props.theme.color['tertiary']};
   border-radius: ${style('radius')};
   box-shadow: ${style('shadow.small')};
   border: none;
@@ -15,12 +15,13 @@ const ButtonStyled = styled.button`
   display: inline-block;
   font-family: ${style('headerFontFamily')};
   font-size: ${style('fontSize.normal')};
-  font-weight: ${style('headerFontWeight')};
+  font-weight: ${style('buttonFontWeight')};
   line-height: ${style('fontSize.normal')};
-  padding: ${style('paddingHalf')};
+  text-transform: uppercase;
+  height: 48px;
   position: relative;
   text-decoration: none;
-  margin-left: ${style('marginHalf')};
+  outline: none;
 `;
 
 const Button = ({ label, ...props }) => (

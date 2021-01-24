@@ -21,10 +21,11 @@ export const style = (name, defaultValue = '') => props => name.split('.').reduc
 export default {
   baseFontSize: '16px',
 
-  baseFontFamily: '\'Source Sans Pro\', sans-serif',
+  baseFontFamily: '\'Open Sans\', sans-serif',
   baseFontWeight: 400,
-  headerFontFamily: '\'Oswald\', sans-serif',
+  headerFontFamily: '\'Open Sans\', sans-serif',
   headerFontWeight: 300,
+  buttonFontWeight: 600,
 
   radius: '0.2rem',
 
@@ -58,14 +59,14 @@ export default {
     component: '#FFFFFF',
     componentAlt: '#f7f7f7',
 
-    primary: '#78CD51',
+    primary: '#0062cc',
     primaryAlt: '#FFFFFF',
     secondary: '#00CEFD',
     secondaryAlt: '#FFFFFF',
     tertiary: '#BEC3C7',
     tertiaryAlt: '#FFFFFF',
     quaternary: '#F46357',
-    quaternaryAlt: '#FFFFFF',
+    quaternaryAlt: '#FFFFFF'
   },
 
   fontSize: {
@@ -74,6 +75,7 @@ export default {
     h3: '1.75rem',
     h4: '1.375rem',
     normal: '1rem',
+    xs: '.75rem',
   },
 
   shadow: {
