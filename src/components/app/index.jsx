@@ -1,22 +1,13 @@
-
-import React from 'react';
-import { Provider } from 'react-redux';
-import Theme from '../theme';
-import createStore from '../../store';
-import Layout from '../layout';
-import H1 from './H1';
-
+import React from "react";
+import { Provider } from "react-redux";
+import createStore from "../../store";
+import Countries from "./Countries";
+import rootReducer from "../../store/reducers";
 // create the redux store
-const store = createStore();
+const store = createStore(rootReducer);
 
 export default () => (
   <Provider store={store}>
-    <Theme>
-      <Layout>
-        <H1>
-          Good luck!
-        </H1>
-      </Layout>
-    </Theme>
+    <Countries />
   </Provider>
 );
