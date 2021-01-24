@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer, { getInitialState } from './reducer';
 
 export default () => createStore(
-    reducer,
-    getInitialState(),
-    composeWithDevTools(applyMiddleware(thunk))
+  reducer,
+  getInitialState(),
+  composeWithDevTools(applyMiddleware(thunk))
 );

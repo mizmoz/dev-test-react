@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
+
 import Theme from '../theme';
 import createStore from '../../store';
+
 import Layout from '../layout';
 import Sidebar from '../layout/Sidebar';
 import Main from '../layout/Main';

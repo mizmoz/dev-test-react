@@ -14,18 +14,18 @@ const ButtonAction = styled(Button)`
 `;
 
 const Table = styled.table`
-width: 100%;
-border-collapse: collapse;
-border: 1px solid #ccc;
-font-family: ${style('baseFontFamily')};
-font-size: ${style('fontSize.xs')};
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  font-family: ${style('baseFontFamily')};
+  font-size: ${style('fontSize.xs')};
 
-th, td {
+  th, td {
     text-align: left;
     border-collapse: collapse;
     border: 1px solid #ccc;
     padding: ${style('paddingHalf')}
-}
+  }
 `;
 
 export {
