@@ -111,7 +111,6 @@ const CountriesComponent = () => {
                 { message.length > 0 ? <ErrorMessage>{ message }</ErrorMessage> : <React.Fragment /> }
                 { showSuccessMessage ? <SuccessMessage>Successfully saved!</SuccessMessage> : <React.Fragment /> }
 
-                <br/><br/>
                 <Button label="save" disabled={message.length > 0} color="dark" onClick={savePopulation}/>
                 <Button label="delete" color="light" ml="1px" onClick={deletePopulation}/>
             </FormGroup>
