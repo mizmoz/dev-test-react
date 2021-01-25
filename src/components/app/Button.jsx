@@ -20,7 +20,10 @@ const ButtonStyled = styled.button`
   padding: ${style('paddingHalf')};
   position: relative;
   text-decoration: none;
-  margin-left: ${style('marginHalf')};
+  margin-left: ${props => props.ml};
+  margin-right:${props => props.mr};
+  margin-top: ${props => props.mt};
+  margin-bottom: ${props => props.mb};
 `;
 
 const Button = ({ label, ...props }) => (

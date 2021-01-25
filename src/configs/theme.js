@@ -66,6 +66,10 @@ export default {
     tertiaryAlt: '#FFFFFF',
     quaternary: '#F46357',
     quaternaryAlt: '#FFFFFF',
+    dark: 'black',
+    darkAlt: '#FFFFFF',
+    light: '#FFFFFF',
+    lightAlt: 'black'
   },
 
   fontSize: {
