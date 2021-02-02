@@ -49,6 +49,7 @@ export default {
     /**
      * Style Colours
      */
+    white: '#fff',
     background: '#EFF1F2',
     baseFont: '#5e6168',
     headerFont: '#2A2D34',

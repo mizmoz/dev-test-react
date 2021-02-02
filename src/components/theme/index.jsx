@@ -20,7 +20,7 @@ export default class Theme extends PureComponent {
       
       html,
       body {
-        background-color: ${theme.color.background};
+        background-color: ${theme.color.white};
         font-size: ${theme.baseFontSize};
         margin: 0;
       }
