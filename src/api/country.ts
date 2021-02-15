@@ -1,11 +1,12 @@
-
-import countries from '../configs/country';
+import countries from '../config/country.json'
 
 /**
  * API to get the countries, sometimes this fails.
  *
  * @returns {Promise<any>}
  */
-export default () => new Promise((resolve, reject) => {
+const countriesApi = (): Promise<any> => new Promise((resolve, reject) => {
   setTimeout(() => (Math.round(Math.random()) === 0 ? resolve(countries) : reject()), 100);
 });
+
+export default countriesApi
