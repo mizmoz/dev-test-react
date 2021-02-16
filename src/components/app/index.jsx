@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import Theme from '../theme';
 import createStore from '../../store';
 import Layout from '../layout';
-import H1 from './H1';
+import CountryPopulation from './CountryPopulation';
 
 // create the redux store
 const store = createStore();
@@ -13,9 +13,7 @@ export default () => (
   <Provider store={store}>
     <Theme>
       <Layout>
-        <H1>
-          Good luck!
-        </H1>
+        <CountryPopulation></CountryPopulation>
       </Layout>
     </Theme>
   </Provider>
