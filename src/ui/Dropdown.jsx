@@ -24,7 +24,7 @@ const StyledSelect = styled.select`
 
 const Dropdown = ({ options, onChange, ...props }) => {
 
-    return (<StyledSelect {...props} on onChange={(event) => onChange(event)}>
+    return (<StyledSelect {...props} onChange={(event) => onChange(event)}>
         {options?.map(option => (
             <option key={JSON.stringify(option.value)} value={JSON.stringify(option.value)}>{option.label}</option>
         ))}
