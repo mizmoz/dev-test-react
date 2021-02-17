@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from "react-redux"
-import { COUNTRY_CREATE, COUNTRY_READ } from '../../store/actionTypes'
 import CountryPopulationForm from "./CountryPopulationForm"
 import CountryPopulationList from "./CountryPopulationList"
 import H1 from '../../ui/H1';
@@ -33,17 +31,4 @@ const CountryPopulation = props => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        countryPopulations: state.countryPopulations
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        onCreate: () => dispatch({ type: COUNTRY_CREATE }),
-        onRead: () => dispatch({ type: COUNTRY_READ })
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CountryPopulation)
+export default CountryPopulation
