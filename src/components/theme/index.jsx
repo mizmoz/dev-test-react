@@ -25,10 +25,6 @@ export default class Theme extends PureComponent {
         margin: 0;
       }
       
-      html {
-        padding: ${theme.padding};
-      }
-      
       body {
         padding: 0;
       }
