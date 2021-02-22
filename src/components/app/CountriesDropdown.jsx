@@ -4,6 +4,7 @@ import Dropdown from '../../ui/Dropdown';
 import Span from '../../ui/Span'
 import Spinner from '../../ui/Spinner'
 import promiseRetry from "promise-retry";
+import PropTypes from 'prop-types';
 
 const CountriesDropdown = ({ onChange, onLoad, ...props }) => {
     const [countries, setCountries] = useState();
@@ -22,8 +23,10 @@ const CountriesDropdown = ({ onChange, onLoad, ...props }) => {
                 .catch(retry);
         }).then(countries => {
             const countriesAsOptions = countries.map(country => (
-                { value: country,
-                label: <span><img src={`https://www.countryflags.io/${country.iso2}/flat/16.png`}/> <Span>{country.name}</Span></span> }
+                {
+                    value: country,
+                    label: <span><img src={`https://www.countryflags.io/${country.iso2}/flat/16.png`} /> <Span>{country.name}</Span></span>
+                }
             )
             )
                 .sort((a, b) => a.value.name.localeCompare(b.value.name))
@@ -48,9 +51,15 @@ const CountriesDropdown = ({ onChange, onLoad, ...props }) => {
         <>
             {loading && <Span><Spinner></Spinner></Span>}
             {error && <Span>{error}</Span>}
-            {!loading && !error && countries && <div style={{width: "450px"}}><Dropdown options={countries} onChange={(event) => onDropdownChangeHandler(event)} {...props}></Dropdown ></div>}
+            {!loading && !error && countries && <div style={{ width: "450px" }}><Dropdown options={countries} onChange={(event) => onDropdownChangeHandler(event)} {...props}></Dropdown ></div>}
+
         </>
     )
+}
+
+CountriesDropdown.propTypes = {
+    onChange: PropTypes.func.isRequired,
+    onLoad: PropTypes.func.isRequired,
 }
 
 export default CountriesDropdown

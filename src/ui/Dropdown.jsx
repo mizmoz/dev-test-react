@@ -37,4 +37,12 @@ const Dropdown = ({ options, onChange, ...props }) => {
     )
 }
 
+Dropdown.PropTypes = {
+    options: PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+    })),
+    onChange: PropTypes.func.isRequired,
+}
+
 export default React.memo(Dropdown)
