@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { style } from '../configs/theme';
+import Select from 'react-select'
 
 const StyledSelect = styled.select`
     background: ${props => props.theme.color[props.color]};
@@ -24,11 +25,15 @@ const StyledSelect = styled.select`
 
 const Dropdown = ({ options, onChange, ...props }) => {
 
-    return (<StyledSelect {...props} onChange={(event) => onChange(event)}>
-        {options?.map(option => (
-            <option key={JSON.stringify(option.value)} value={JSON.stringify(option.value)}>{option.label}</option>
-        ))}
-    </StyledSelect>
+    return (<Select {...props} onChange={(event) => onChange(event)} options={options}
+        defaultValue={options[0]}>
+        {/* {options?.map(option => (
+            <option key={JSON.stringify(option.value)}
+                value={JSON.stringify(option.value)}>
+                <img src={option.icon} /> {option.label}
+            </option>
+        ))} */}
+    </Select>
     )
 }
 

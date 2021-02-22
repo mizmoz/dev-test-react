@@ -1,49 +1,49 @@
-import { COUNTRY_CREATE, COUNTRY_READ, COUNTRY_UPDATE, COUNTRY_DELETE } from './actionTypes'
+import { COUNTRY_DATA_CREATE, COUNTRY_DATA_READ, COUNTRY_DATA_UPDATE, COUNTRY_DATA_DELETE } from './actionTypes'
 
 export const getInitialState = () => ({
   // initial state...
-  countryPopulation: { country: null, population: 0 },
-  countryPopulations: []
+  countryData: { country: null, population: 0 },
+  countryDataList: []
 });
 
 export default (state, action) => {
   switch (action.type) {
-    case COUNTRY_CREATE: {
-      const { countryPopulation } = action
+    case COUNTRY_DATA_CREATE: {
+      const { countryData } = action
       return {
         ...state,
-        countryPopulations: [...state.countryPopulations, countryPopulation]
+        countryDataList: [...state.countryDataList, countryData]
       }
     }
-    case COUNTRY_READ: {
+    case COUNTRY_DATA_READ: {
       const { country } = action
       return {
         ...state,
-        countryPopulation: { ...state.countryPopulations.find(el => el.country.code === country.code) }
+        countryData: { ...state.countryDataList.find(el => el.country.code === country.code) }
       }
-    } case COUNTRY_UPDATE: {
-      const { countryPopulation } = action
-      let countryPopulations = [...state.countryPopulations]
-      const index = countryPopulations.findIndex(el => el.country.code === countryPopulation.country.code)
+    } case COUNTRY_DATA_UPDATE: {
+      const { countryData } = action
+      let countryDataList = [...state.countryDataList]
+      const index = countryDataList.findIndex(el => el.country.code === countryData.country.code)
       if (index > -1) {
-        countryPopulations[index] = countryPopulation
+        countryDataList[index] = countryData
       }
       return {
         ...state,
-        countryPopulations: countryPopulations
+        countryDataList: countryDataList
       }
     }
-    case COUNTRY_DELETE: {
+    case COUNTRY_DATA_DELETE: {
       const { country } = action
 
-      let countryPopulations = [...state.countryPopulations]
-      const index = countryPopulations.findIndex(el => el.country.code === country.code)
+      let countryDataList = [...state.countryDataList]
+      const index = countryDataList.findIndex(el => el.country.code === country.code)
       if (index > -1) {
-        countryPopulations.splice(index, 1)
+        countryDataList.splice(index, 1)
       }
       return {
         ...state,
-        countryPopulations: countryPopulations
+        countryDataList: countryDataList
       }
     }
 

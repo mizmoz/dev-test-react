@@ -16,7 +16,7 @@ const StyledInput = styled.input`
     font-size: ${style('fontSize.normal')};
     font-weight: ${style('headerFontWeight')};
     line-height: ${style('fontSize.normal')};
-    padding: ${style('paddingHalf')};
+    padding: .35rem;
     position: relative;
     text-decoration: none;
     margin-left: ${style('marginHalf')};
