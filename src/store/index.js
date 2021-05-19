@@ -1,5 +1,11 @@
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from "redux";
 import reducer, { getInitialState } from './reducer';
+import { getDataMiddleware, checkPopulationMiddleware } from "../middleware";
+import { getData } from "../actions/index";
+import {DATA_LOADING} from "../configs/messages";
 
-export default () => createStore(reducer, getInitialState());
+const store =  createStore(reducer, getInitialState(), applyMiddleware(getDataMiddleware, checkPopulationMiddleware));
+
+store.dispatch(getData([],false, DATA_LOADING));
+export default () => store;

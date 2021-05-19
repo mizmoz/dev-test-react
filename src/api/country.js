@@ -6,6 +6,7 @@ import countries from '../configs/country';
  *
  * @returns {Promise<any>}
  */
+
 export default () => new Promise((resolve, reject) => {
   setTimeout(() => (Math.round(Math.random()) === 0 ? resolve(countries) : reject()), 100);
 });
