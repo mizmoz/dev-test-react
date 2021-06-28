@@ -12,17 +12,9 @@
       "modules": true
     }
   },
-  "ecmaFeatures": {
-    "jsx": true,
-    "modules": true
-  },
   "rules": {
     "max-len": [1, 120, 2],
-    "react/jsx-uses-react": 1,
-    "object-shorthand": [
-      2,
-      "consistent"
-    ]
+    "react/jsx-uses-react": 1
   },
   "env": {
     "browser": true,
