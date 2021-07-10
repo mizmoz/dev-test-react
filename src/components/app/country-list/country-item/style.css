@@ -1,0 +1,29 @@
+.box-country-item{
+  height: auto;
+}
+.country-button{
+  background: #21333e;
+  border-radius: 5px;
+  color: #FFA400;
+  margin: 0px;
+  height: auto;
+  width: 300px;
+  font: bold 12px arial, sans-serif;
+  text-shadow:none;
+  text-align: left;
+  cursor: pointer;
+
+  border: none;
+  outline:none;
+
+  display: flex;
+  align-items: center; /* Align Items Vertically */
+  justify-content: space-between;
+}
+.country-button:hover{
+  background:#55839e;
+  color: black;
+}
+.selected .country-button{
+  color: #73b4d9;
+}

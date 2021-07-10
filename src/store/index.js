@@ -1,5 +1,5 @@
 
 import { createStore } from 'redux';
-import reducer, { getInitialState } from './reducer';
+import combiner, { getInitialState } from './combiner';
 
-export default () => createStore(reducer, getInitialState());
+export default () => createStore(combiner, getInitialState());
