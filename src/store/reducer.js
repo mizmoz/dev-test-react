@@ -1,10 +1,6 @@
+import { combineReducers } from 'redux';
+import Populations from 'features/Populations';
 
-export const getInitialState = () => ({
-  // initial state...
-});
-
-export default (state, action) => ({
-  ...state,
-
-  // reducers...
+export default combineReducers({
+  [Populations.constants.NAME]: Populations.reducer,
 });

@@ -85,4 +85,8 @@ export default {
     min: '320px',
     max: '1200px',
   },
+
+  breakpoints: {
+    xs: '480px',
+  },
 };
